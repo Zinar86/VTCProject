@@ -17,7 +17,7 @@ export class SignUp {
         this.userRepository = userRepository;
     }
     async execute( payload : SignUpProps){
-        return await User.create({
+        const user = await User.create({
             firstName : payload.firstName,
             lastname : payload.lastname,
             email : payload.email,
@@ -25,5 +25,7 @@ export class SignUp {
             phoneNumber : payload.phoneNumber,
             profilePictures : payload.profilePictures
         });
+        await this.userRepository.save(user);
+        return user;
     }
 }

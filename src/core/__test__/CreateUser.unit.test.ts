@@ -14,7 +14,6 @@ describe ("Unit - CreateUser", () => {
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await userRepo.save(user);
         expect(user.userProperty.firstName).toEqual("Nico")
     })
     it ("doit recupéré un user via l'Id", async ()=>{
@@ -29,7 +28,6 @@ describe ("Unit - CreateUser", () => {
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await userRepo.save(user);
         const id = user.userProperty.id;
         const userCheck = await getUserById.execute(id)
         expect(userCheck.userProperty.email).toEqual("nico@heuttt.fr")
