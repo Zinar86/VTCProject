@@ -1,5 +1,5 @@
 import {Ride} from "../entities/Ride";
-import {RideType} from "../entities/RideType";
+import {RideType} from "../ValueObject/RideType";
 
 export interface RideRepository {
     create(ride: Ride): Promise<Ride>;
