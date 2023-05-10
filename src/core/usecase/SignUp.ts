@@ -1,11 +1,8 @@
 import {UserRepository} from "../repositories/UserRepository";
 import {User} from "../entities/User";
-import {Address} from "../ValueObject/Address";
-import {Car} from "../entities/Car";
-import {Role} from "../ValueObject/Role";
 export interface SignUpProps{
     firstName: string;
-    lastname : string;
+    lastName : string;
     email : string;
     password : string;
     phoneNumber : string;
@@ -19,7 +16,7 @@ export class SignUp {
     async execute( payload : SignUpProps){
         const user = await User.create({
             firstName : payload.firstName,
-            lastname : payload.lastname,
+            lastName : payload.lastName,
             email : payload.email,
             password : payload.password,
             phoneNumber : payload.phoneNumber,

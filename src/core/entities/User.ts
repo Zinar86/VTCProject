@@ -1,12 +1,11 @@
 import {Car} from "./Car";
 import {Address} from "../ValueObject/Address";
 import {Role} from "../ValueObject/Role";
-import {UserRepository} from "../repositories/UserRepository";
 import {v4} from "uuid";
 
 export interface UserProperty {
     firstName: string;
-    lastname : string;
+    lastName : string;
     email : string;
     id: string;
     password : string;
@@ -25,7 +24,7 @@ export class User {
     }
     static async create(props:{
         firstName: string;
-        lastname : string;
+        lastName : string;
         email : string;
         password : string;
         phoneNumber : string;
@@ -47,5 +46,20 @@ export class User {
             car : [],
             type: Role.client,
         })
+    }
+
+    update(props: {
+        firstName: string,
+        lastName: string,
+        password : string,
+        phoneNumber : string,
+        profilePictures : string,
+    })
+    {
+       this.userProperty.firstName = props.firstName;
+       this.userProperty.lastName = props.lastName;
+       this.userProperty.password = props.password;
+       this.userProperty.phoneNumber = props.phoneNumber;
+       this.userProperty.profilePictures = props.profilePictures;
     }
 }

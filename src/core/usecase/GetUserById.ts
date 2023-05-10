@@ -1,9 +1,4 @@
-import {UserProperty} from "../entities/User";
 import {UserRepository} from "../repositories/UserRepository";
-
-export interface GetUserByIdProps {
-
-}
 
 export class GetUserById {
     userRepository : UserRepository;

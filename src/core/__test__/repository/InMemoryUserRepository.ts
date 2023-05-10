@@ -1,5 +1,5 @@
 import {UserRepository} from "../../repositories/UserRepository";
-import {User} from "../../entities/User";
+import {User, UserProperty} from "../../entities/User";
 
 export class InMemoryUserRepository implements UserRepository{
     listUser: User[] = [];
@@ -25,8 +25,4 @@ export class InMemoryUserRepository implements UserRepository{
         }
         return user;
     }
-    async update(user: User): Promise<User> {
-        return user;
-    }
-
 }
