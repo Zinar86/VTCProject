@@ -62,4 +62,9 @@ export class User {
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
     }
+    verifyPassword(password: string){
+        if (password === this.userProperty.password) {
+            return true;
+        }
+    }
 }
