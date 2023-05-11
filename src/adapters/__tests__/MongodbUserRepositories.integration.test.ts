@@ -14,9 +14,9 @@ describe('Integration - MongodbUserRepository', () => {
         connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/VTCProject')
     })
 
-    afterAll(async () => {
-        await connection.dropDatabase();
-    });
+    //afterAll(async () => {
+     //   await connection.dropDatabase();
+    //});
 
     it('Doit sauvegarder un document dans ma base de donnée mongodb', async () => {
         const user = await User.create({
