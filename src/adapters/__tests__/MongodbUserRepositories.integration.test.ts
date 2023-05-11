@@ -2,17 +2,20 @@ import {User} from "../../core/entities/User";
 import * as mongoose from 'mongoose';
 import { UserRepository } from "../../core/repositories/UserRepository";
 import { MongodbUserRepository } from "../repositories/mongodb/MongodbUserRepositories";
+import {Connection} from "mongoose";
 
 describe('Integration - MongodbUserRepository', () => {
     let userRepository: UserRepository;
+    let connection: Connection;
 
     beforeAll(async () => {
         userRepository = new MongodbUserRepository();
         await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject')
+        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/VTCProject')
     })
 
     afterAll(async () => {
-        await mongoose.disconnect();
+        await connection.dropDatabase();
     });
 
     it('Doit sauvegarder un document dans ma base de donnée mongodb', async () => {
