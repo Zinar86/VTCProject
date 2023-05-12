@@ -16,6 +16,7 @@ export class UpdateUser {
     }
     async execute(input: UpdateUserInput){
         const user = await this.userRepository.getById(input.id);
+
         user.update({
             firstName: input.firstName,
             lastName: input.lastName,

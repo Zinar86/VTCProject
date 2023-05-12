@@ -22,7 +22,7 @@ export class User {
     constructor(userProperty : UserProperty) {
         this.userProperty = userProperty;
     }
-    static async create(props:{
+    static create(props:{
         firstName: string;
         lastName : string;
         email : string;
@@ -61,5 +61,10 @@ export class User {
        this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
+    }
+    verifyPassword(password: string){
+        if (password === this.userProperty.password) {
+            return true;
+        }
     }
 }
