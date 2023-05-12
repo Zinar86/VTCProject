@@ -1,13 +1,22 @@
 import {EstimatePriceGateway} from "../../core/gateways/EstimatePriceGateway";
 import {RideType} from "../../core/ValueObject/RideType";
 import dotenv from "dotenv"
+import {GetCalculatedDistanceGateway} from "./GetCalculatedDistanceGateway";
+import {Address} from "../../core/ValueObject/Address";
 
 dotenv.config()
 
 
 export class GetEstimatedPriceGateway implements EstimatePriceGateway {
-    estimatePrice(distance: number, rideType: RideType): number {
-        const ratePerKm = Number(process.env.RATEPERKM)
+    getCalculatedDistanceGateway : GetCalculatedDistanceGateway;
+    constructor(getCalculatedDistanceGateway : GetCalculatedDistanceGateway) {
+        this.getCalculatedDistanceGateway = getCalculatedDistanceGateway
+    }
+
+
+    estimatePrice(rideType: RideType, startAddress: Address, endAddress: Address): number {
+        const distance = this.getCalculatedDistanceGateway.calculateDistance(startAddress, endAddress);
+        const ratePerKm = Number(process.env.RATEPERKM);
         switch (rideType) {
             case RideType.Eco :
                 return (distance * ratePerKm) + 2;
