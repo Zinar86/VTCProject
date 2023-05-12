@@ -1,6 +1,7 @@
 import {DataGouvAddressGateway} from "../gateways/DataGouvAddressGateway";
 import axios from "axios";
 
+<<<<<<< HEAD
 describe ("Unit - DataGouvAddressGetway", () => {
     jest.mock('axios');
 
@@ -10,6 +11,9 @@ describe ("Unit - DataGouvAddressGetway", () => {
         beforeEach(() => {
             dataGouvAddressGateway = new DataGouvAddressGateway();
         });
+=======
+describe ("Unit - DataGouvAddressGateway", () => {
+>>>>>>> 931bfd33e5952cba7e2b60ce5114fa29a0efb3da
     it("recupérer les données d'une adresse ", async () =>{
 
         const expectedAddress = {
