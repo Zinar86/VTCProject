@@ -1,11 +1,13 @@
 import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
 import {SignIn} from "../usecase/SignIn";
 import {User} from "../entities/User";
+import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
 
 describe("Unit - SignIn", () =>{
     it("doit verifier si le mot de passe est valide",async ()=>{
         const userRepo = new InMemoryUserRepository();
-        const signIn = new SignIn(userRepo);
+        const passwordGateway = new InMemoryPasswordGateway();
+        const signIn = new SignIn(userRepo, passwordGateway);
         const user = await User.create({
             firstName : "dede",
             lastName : "lolo",
@@ -19,6 +21,6 @@ describe("Unit - SignIn", () =>{
             email: "az@er.fr",
             password: "azerty"
         })
-        expect(result).toEqual(true);
+        expect(result).toEqual(user);
     })
 })

@@ -2,8 +2,6 @@ import {PaymentMethod} from "../ValueObject/PaymentMethod";
 import {RideType} from "../ValueObject/RideType";
 import {Address} from "../ValueObject/Address";
 import {v4} from "uuid";
-import {Role} from "../ValueObject/Role";
-import {UserProperty} from "./User";
 
 export interface RideProperty {
     id: string;
