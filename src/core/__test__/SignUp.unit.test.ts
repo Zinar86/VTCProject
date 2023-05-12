@@ -2,11 +2,13 @@ import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
 import {SignUp} from "../usecase/SignUp";
 import {GetUserById} from "../usecase/GetUserById";
 import {UpdateUser} from "../usecase/UpdateUser";
+import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
 
-describe ("Unit - CreateUser", () => {
+describe ("Unit - SignUp", () => {
     it("doit créé un user", async () =>{
         const userRepo = new InMemoryUserRepository();
-        const signUp = new SignUp(userRepo);
+        const passwordGateway = new InMemoryPasswordGateway();
+        const signUp = new SignUp(userRepo, passwordGateway);
         const user = await signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",

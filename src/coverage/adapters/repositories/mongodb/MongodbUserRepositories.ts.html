@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85% </span>
+                <span class="strong">15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/20</span>
+                <span class='fraction'>3/20</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85% </span>
+                <span class="strong">15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/20</span>
+                <span class='fraction'>3/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -146,20 +146,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -196,20 +196,20 @@ export class MongodbUserRepository implements UserRepository {
                 upsert: true,
             }
         )
-        const userModel = new UserModel();
-        userModel.id = user.userProperty.id;
-        userModel.firstName = user.userProperty.firstName;
-        userModel.lastName = user.userProperty.lastName;
-        userModel.email = user.userProperty.email;
-        userModel.password = user.userProperty.password;
-        userModel.phoneNumber = user.userProperty.phoneNumber;
-        userModel.profilePictures = user.userProperty.profilePictures;
-        userModel.rating = user.userProperty.rating;
-        userModel.isAvailable = user.userProperty.isAvailable;
-        userModel.position = user.userProperty.position;
-        userModel.car = user.userProperty.car;
-        userModel.type = user.userProperty.type;
-        return user;
+        const userModel = <span class="cstat-no" title="statement not covered" >new UserModel();</span>
+<span class="cstat-no" title="statement not covered" >        userModel.id = user.userProperty.id;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.firstName = user.userProperty.firstName;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.lastName = user.userProperty.lastName;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.email = user.userProperty.email;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.password = user.userProperty.password;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.phoneNumber = user.userProperty.phoneNumber;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.profilePictures = user.userProperty.profilePictures;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.rating = user.userProperty.rating;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.isAvailable = user.userProperty.isAvailable;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.position = user.userProperty.position;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.car = user.userProperty.car;</span>
+<span class="cstat-no" title="statement not covered" >        userModel.type = user.userProperty.type;</span>
+<span class="cstat-no" title="statement not covered" >        return user;</span>
     }
 }
 &nbsp;
@@ -220,7 +220,7 @@ export class MongodbUserRepository implements UserRepository {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-05-11T15:00:38.233Z
+                at 2023-05-11T15:14:50.335Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
