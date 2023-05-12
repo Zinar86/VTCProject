@@ -5,11 +5,11 @@ export class GetCalculatedDistanceGateway implements CalculateDistanceGateway{
     calculateDistance(startAddress: Address, endAddress: Address): number {
         return this.distanceBetweenEarthCoordinatesInKm(startAddress.lat, startAddress.long, endAddress.lat, endAddress.long)
     }
-    degreeToRadian = (degree: number) => {
+    private degreeToRadian (degree: number) {
         return degree * Math.PI / 180;
     }
 
-    distanceBetweenEarthCoordinatesInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    private distanceBetweenEarthCoordinatesInKm (lat1: number, lon1: number, lat2: number, lon2: number){
         const earthRadiusInKm = 6371;
 
         const dLat = this.degreeToRadian(lat2 - lat1);
@@ -24,3 +24,4 @@ export class GetCalculatedDistanceGateway implements CalculateDistanceGateway{
         return earthRadiusInKm * c;
     }
 }
+
