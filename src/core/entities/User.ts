@@ -41,7 +41,7 @@ export class User {
                 lat: 0,
                 streetAddress: "",
                 city: "",
-                zipCode: 0
+                zipCode: "0"
                 },
             car : [],
             type: Role.client,

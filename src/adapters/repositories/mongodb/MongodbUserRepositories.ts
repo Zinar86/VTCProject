@@ -43,7 +43,6 @@ export class MongodbUserRepository implements UserRepository {
             rating: result.rating,
             type: result.type as Role
         });
-
     }
     async save(user: User): Promise<User> {
         await UserModel.findOneAndUpdate(

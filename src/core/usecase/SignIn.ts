@@ -1,4 +1,5 @@
 import {UserRepository} from "../repositories/UserRepository";
+import {PasswordGateway} from "../gateways/PasswordGateway";
 
 export interface SignInProps{
     email: string,
@@ -6,13 +7,18 @@ export interface SignInProps{
 }
 export class SignIn {
     userRepository : UserRepository;
-    constructor(userRepository : UserRepository) {
+    passwordGateway : PasswordGateway;
+    constructor(userRepository : UserRepository, passwordGateway: PasswordGateway,) {
+        this.passwordGateway = passwordGateway;
         this.userRepository = userRepository;
     }
     async execute(payload: SignInProps) {
+
         const user = await this.userRepository.getByEmail(payload.email);
-        //throw Error if mdp faux
-        return user
-        //return user
+        const passwordCheck = await this.passwordGateway.compare(payload.password, user.userProperty.password);
+        if (passwordCheck) {
+            return user;//Riadh <3 <3
+        }
+        throw new Error("Authentication failed");
     }
 }
