@@ -11,6 +11,8 @@ export class SignIn {
     }
     async execute(payload: SignInProps) {
         const user = await this.userRepository.getByEmail(payload.email);
-        return user.verifyPassword(payload.password);
+        //throw Error if mdp faux
+        return user
+        //return user
     }
 }

@@ -11,12 +11,12 @@ describe('Integration - MongodbUserRepository', () => {
     beforeAll(async () => {
         userRepository = new MongodbUserRepository();
         await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject')
-        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/VTCProject')
+        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/test')
     })
 
-    //afterAll(async () => {
-     //   await connection.dropDatabase();
-    //});
+    afterAll(async () => {
+        await connection.dropDatabase();
+    });
 
     it('Doit sauvegarder un document dans ma base de donnée mongodb', async () => {
         const user = await User.create({
