@@ -27,7 +27,7 @@ export class Ride {
         paymentMethod: PaymentMethod,
         rideType: RideType,
         priceEstimation : number,
-    }) {
+    }) : Promise<Ride> {
         return new Ride({
             ...props,
             id: v4(),

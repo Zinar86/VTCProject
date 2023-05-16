@@ -1,5 +1,5 @@
 import {UserRepository} from "../repositories/UserRepository";
-import {PasswordGateway} from "../gateways/PasswordGateway";
+import {BcryptPasswordGateway} from "../gateways/bcrypt/BctyptPasswordGateway";
 
 export interface SignInProps{
     email: string,
@@ -7,8 +7,8 @@ export interface SignInProps{
 }
 export class SignIn {
     userRepository : UserRepository;
-    passwordGateway : PasswordGateway;
-    constructor(userRepository : UserRepository, passwordGateway: PasswordGateway,) {
+    passwordGateway : BcryptPasswordGateway;
+    constructor(userRepository : UserRepository, passwordGateway: BcryptPasswordGateway,) {
         this.passwordGateway = passwordGateway;
         this.userRepository = userRepository;
     }
