@@ -19,19 +19,4 @@ export class Ride {
     constructor(rideProperties: RideProperty) {
         this.rideProperty = rideProperties;
     }
-
-    static async create(props: {
-        userId: string,
-        startAddress: Address,
-        endAddress: Address,
-        paymentMethod: PaymentMethod,
-        rideType: RideType,
-        priceEstimation : number,
-    }) : Promise<Ride> {
-        return new Ride({
-            ...props,
-            id: v4(),
-
-        })
-    }
 }

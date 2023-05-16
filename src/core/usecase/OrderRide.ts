@@ -4,6 +4,7 @@ import {Ride} from "../entities/Ride";
 import {RideType} from "../ValueObject/RideType";
 import {InMemoryRideRepository} from "../../adapters/repositories/inmemory/InMemoryRideRepository";
 import {RideRepository} from "../repositories/RideRepository";
+import {v4} from "uuid";
 interface OrderRideInput  {
      id : string,
      userId : string
@@ -24,7 +25,8 @@ export class OrderRide {
 
     async execute( payload : OrderRideInput) {
 
-        const ride = await Ride.create({
+        const ride = new Ride({
+            id : v4(),
             userId: payload.userId,
             startAddress: payload.startAddress,
             endAddress: payload.endAddress,
