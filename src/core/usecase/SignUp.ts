@@ -1,7 +1,7 @@
 import {UserRepository} from "../repositories/UserRepository";
 import {User} from "../entities/User";
 import {PasswordGateway} from "../gateways/PasswordGateway";
-export interface SignUpProps{
+export interface SignUpProps {
     firstName: string;
     lastName : string;
     email : string;
