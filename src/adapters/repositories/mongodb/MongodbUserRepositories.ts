@@ -4,10 +4,39 @@ import { UserModel } from "./models/UserModel";
 import {Role} from "../../../core/ValueObject/Role";
 
 export class MongodbUserRepository implements UserRepository {
-    getById(id: string): Promise<User> {
-        const user = UserModel.findById(id);
+    async getById(id: string): Promise<User> {
+        const result = await UserModel.findOne({
+            id: id
+        });
+        console.log("result ==========>", result);
+        return new User({
+            email: result.email,
+            password: result.password,
+            phoneNumber: result.phoneNumber,
+            profilePictures: result.profilePictures,
+            lastName: result.lastName,
+            firstName: result.firstName,
+            car: result.car.map((car)=>{
+                return {
+                    id: car.id,
+                    model: car.model,
+                    picture: car.picture,
+                    registration: car.registration
+                };
+            }),
+            id: result.id,
+            position: {
+                long: result.position.long,
+                lat: result.position.lat,
+                streetAddress: result.position.streetAddress,
+                city: result.position.city,
+                zipCode: result.position.zipCode
+            },
+            isAvailable: result.isAvailable,
+            rating: result.rating,
+            type: result.type as Role
+        });
 
-        throw new Error("Method not implemented.");
     }
     async getByEmail(email: string): Promise<User> {
         const result = await UserModel.findOne({

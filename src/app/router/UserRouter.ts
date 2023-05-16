@@ -11,7 +11,7 @@ export const userRouter = Router();
 const userRepository = new MongodbUserRepository();
 const passwordGateway = new BcryptPasswordGateway();
 const signUp = new SignUp(userRepository, passwordGateway);
-const signIn = new SignIn(userRepository);
+const signIn = new SignIn(userRepository, passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 
 userRouter.post('/signup', async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
 userRouter.use((req: AuthenticatedRequest, res, next)=>{
     //via token
     req.user =  {
-        id: "45",
+        id: "bb26d3ba-f677-4ac8-9384-701ae9dc5b61",
         email: "fgf"
     }
     return next();
@@ -48,6 +48,6 @@ userRouter.post('/update', async (req: AuthenticatedRequest, res: Response) => {
         phoneNumber: req.body.phoneNumber,
         profilePictures: req.body.profilePictures,
         id: req.user.id,
-        email: req.body.email
     })
+    return res.status(200).send(result);
 })

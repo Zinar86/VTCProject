@@ -19,7 +19,6 @@ describe("Unit - UpdateUser", () =>{
             id: user.userProperty.id,
             firstName: "Marc",
             lastName : "tanguy",
-            email :user.userProperty.email,
             password : "1234",
             phoneNumber : user.userProperty.phoneNumber,
             profilePictures : user.userProperty.profilePictures,
