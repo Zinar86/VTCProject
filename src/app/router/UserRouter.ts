@@ -11,7 +11,7 @@ export const userRouter = Router();
 const userRepository = new MongodbUserRepository();
 const passwordGateway = new BcryptPasswordGateway();
 const signUp = new SignUp(userRepository, passwordGateway);
-const signIn = new SignIn(userRepository);
+const signIn = new SignIn(userRepository,passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 
 userRouter.post('/signup', async (req: Request, res: Response) => {
