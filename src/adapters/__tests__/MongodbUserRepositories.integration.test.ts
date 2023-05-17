@@ -27,6 +27,6 @@ describe('Integration - MongodbUserRepository', () => {
             phoneNumber: '0606060606',
             profilePictures: 'https://www.google.com',
         })
-        const result = await userRepository.save(user);
+        await userRepository.save(user);
     })
 })

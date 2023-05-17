@@ -1,6 +1,5 @@
 import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {SignUp} from "../usecase/SignUp";
-import {GetUserById} from "../usecase/GetUserById";
+import {GetUserById} from "../usecase/user/GetUserById";
 import {User} from "../entities/User";
 
 describe ("Unit - GetUserById", () => {

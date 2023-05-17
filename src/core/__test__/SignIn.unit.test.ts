@@ -1,5 +1,5 @@
 import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {SignIn} from "../usecase/SignIn";
+import {SignIn} from "../usecase/user/SignIn";
 import {User} from "../entities/User";
 import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
 

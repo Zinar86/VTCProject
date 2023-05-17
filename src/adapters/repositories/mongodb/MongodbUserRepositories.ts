@@ -8,7 +8,9 @@ export class MongodbUserRepository implements UserRepository {
         const result = await UserModel.findOne({
             id: id
         });
-        console.log("result ==========>", result);
+        if (!result){
+            throw new Error("USER_NOT_FOUND");
+        }
         return new User({
             email: result.email,
             password: result.password,
