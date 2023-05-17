@@ -1,5 +1,5 @@
-import {UserRepository} from "../repositories/UserRepository";
-import {PasswordGateway} from "../gateways/PasswordGateway";
+import {UserRepository} from "../../repositories/UserRepository";
+import {PasswordGateway} from "../../gateways/PasswordGateway";
 
 export interface SignInProps{
     email: string,

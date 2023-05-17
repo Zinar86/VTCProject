@@ -1,6 +1,3 @@
-import {UserRepository} from "../../core/repositories/UserRepository";
-import {MongodbUserRepository} from "../repositories/mongodb/MongodbUserRepositories";
-import mongoose from "mongoose";
 import {BcryptPasswordGateway} from "../gateways/bcrypt/BcryptPasswordGateway";
 
 describe("Integration - BcryptPasswordGateway", ()=>{

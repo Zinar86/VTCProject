@@ -1,7 +1,7 @@
-import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {SignIn} from "../usecase/SignIn";
-import {User} from "../entities/User";
-import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
+import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {SignIn} from "../../usecase/user/SignIn";
+import {User} from "../../entities/User";
+import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 
 describe("Unit - SignIn", () =>{
     it("doit verifier si le mot de passe est valide",async ()=>{

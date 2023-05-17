@@ -1,8 +1,8 @@
-import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {SignUp} from "../usecase/SignUp";
-import {GetUserById} from "../usecase/GetUserById";
-import {UpdateUser} from "../usecase/UpdateUser";
-import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
+import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {SignUp} from "../../usecase/user/SignUp";
+import {GetUserById} from "../../usecase/user/GetUserById";
+import {UpdateUser} from "../../usecase/user/UpdateUser";
+import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 
 describe ("Unit - SignUp", () => {
     it("doit créé un user", async () =>{
@@ -19,4 +19,5 @@ describe ("Unit - SignUp", () => {
         })
         expect(user.userProperty.firstName).toEqual("Nico")
     })
+
 })
