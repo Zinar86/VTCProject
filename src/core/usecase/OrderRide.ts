@@ -24,8 +24,7 @@ export class OrderRide {
     }
 
     async execute( payload : OrderRideInput) {
-
-        const ride = new Ride({
+       return await this.rideRepo.save({
             id : v4(),
             userId: payload.userId,
             startAddress: payload.startAddress,
@@ -34,11 +33,7 @@ export class OrderRide {
             paymentMethod: payload.paymentMethod,
             rideType: payload.rideType,
         });
-        await this.rideRepo.save(ride);
-        return ride;
     }
-
-
 }
 
 

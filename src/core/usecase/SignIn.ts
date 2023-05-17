@@ -1,5 +1,5 @@
 import {UserRepository} from "../repositories/UserRepository";
-import {BcryptPasswordGateway} from "../gateways/bcrypt/BctyptPasswordGateway";
+import {BcryptPasswordGateway} from "../../adapters/gateways/bcrypt/BcryptPasswordGateway";
 
 export interface SignInProps{
     email: string,
