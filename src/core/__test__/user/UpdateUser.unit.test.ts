@@ -1,6 +1,6 @@
-import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {UpdateUser} from "../usecase/user/UpdateUser";
-import {User} from "../entities/User";
+import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {UpdateUser} from "../../usecase/user/UpdateUser";
+import {User} from "../../entities/User";
 
 describe("Unit - UpdateUser", () =>{
     it ("doit modifier un user", async () => {

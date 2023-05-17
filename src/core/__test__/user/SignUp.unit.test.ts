@@ -1,8 +1,8 @@
-import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {SignUp} from "../usecase/user/SignUp";
-import {GetUserById} from "../usecase/user/GetUserById";
-import {UpdateUser} from "../usecase/user/UpdateUser";
-import {InMemoryPasswordGateway} from "./gateways/InMemoryPasswordGateway";
+import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {SignUp} from "../../usecase/user/SignUp";
+import {GetUserById} from "../../usecase/user/GetUserById";
+import {UpdateUser} from "../../usecase/user/UpdateUser";
+import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 
 describe ("Unit - SignUp", () => {
     it("doit créé un user", async () =>{
