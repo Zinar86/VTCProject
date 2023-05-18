@@ -34,7 +34,6 @@ export class MongodbUserRepository implements UserRepository {
                 city: result.position.city,
                 zipCode: result.position.zipCode
             },
-            isAvailable: result.isAvailable,
             rating: result.rating,
             type: result.type as Role
         });
@@ -70,7 +69,6 @@ export class MongodbUserRepository implements UserRepository {
                 city: result.position.city,
                 zipCode: result.position.zipCode
             },
-            isAvailable: result.isAvailable,
             rating: result.rating,
             type: result.type as Role
         });
@@ -90,7 +88,6 @@ export class MongodbUserRepository implements UserRepository {
                     phoneNumber: user.userProperty.phoneNumber,
                     profilePictures: user.userProperty.profilePictures,
                     rating : user.userProperty.rating,
-                    isAvailable : user.userProperty.isAvailable,
                     position : user.userProperty.position,
                     car : user.userProperty.car,
                     type : user.userProperty.type,
@@ -109,7 +106,6 @@ export class MongodbUserRepository implements UserRepository {
         userModel.phoneNumber = user.userProperty.phoneNumber;
         userModel.profilePictures = user.userProperty.profilePictures;
         userModel.rating = user.userProperty.rating;
-        userModel.isAvailable = user.userProperty.isAvailable;
         userModel.position = user.userProperty.position;
         userModel.car = user.userProperty.car;
         userModel.type = user.userProperty.type;
