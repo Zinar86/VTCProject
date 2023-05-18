@@ -10,7 +10,7 @@ export interface UserProperty {
     id: string;
     password : string;
     position : Address;
-    rating : number;
+    rating : number[];
     car : Car[];
     isAvailable: boolean;
     type: Role;
@@ -34,7 +34,7 @@ export class User {
         return new User ({
             ...props,
             id : v4(),
-            rating : 5,
+            rating : [],
             isAvailable: true,
             position : {
                 long: 0,
