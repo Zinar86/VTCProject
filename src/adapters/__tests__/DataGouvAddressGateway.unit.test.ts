@@ -4,7 +4,7 @@ import axios from "axios";
 describe ("Unit - DataGouvAddressGateway", () => {
     const dataGouvAddressGateway = new DataGouvAddressGateway()
 
-    it("recupérer les données d'une adresse ", async () =>{
+    it("recupérer les données d'une adresse ", async () => {
 
         const expectedAddress = {
             long: 2.25887,

@@ -10,9 +10,8 @@ export interface UserProperty {
     id: string;
     password : string;
     position : Address;
-    rating : number;
+    rating : number[];
     car : Car[];
-    isAvailable: boolean;
     type: Role;
     phoneNumber : string;
     profilePictures : string;
@@ -34,8 +33,7 @@ export class User {
         return new User ({
             ...props,
             id : v4(),
-            rating : 5,
-            isAvailable: true,
+            rating : [],
             position : {
                 long: 0,
                 lat: 0,
@@ -61,10 +59,5 @@ export class User {
        this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
-    }
-    verifyPassword(password: string){
-        if (password === this.userProperty.password) {
-            return true;
-        }
     }
 }

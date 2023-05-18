@@ -1,6 +1,6 @@
-import {InMemoryUserRepository} from "./repository/InMemoryUserRepository";
-import {UpdateUser} from "../usecase/UpdateUser";
-import {User} from "../entities/User";
+import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {UpdateUser} from "../../usecase/user/UpdateUser";
+import {User} from "../../entities/User";
 
 describe("Unit - UpdateUser", () =>{
     it ("doit modifier un user", async () => {
@@ -19,7 +19,6 @@ describe("Unit - UpdateUser", () =>{
             id: user.userProperty.id,
             firstName: "Marc",
             lastName : "tanguy",
-            email :user.userProperty.email,
             password : "1234",
             phoneNumber : user.userProperty.phoneNumber,
             profilePictures : user.userProperty.profilePictures,
