@@ -1,8 +1,10 @@
 import {GetEstimatedPriceGateway} from "../gateways/GetEstimatedPriceGateway";
 import {RideType} from "../../core/ValueObject/RideType";
+import {GetCalculatedDistanceGateway} from "../gateways/GetCalculatedDistanceGateway";
 
 describe ("Unit - GetEstimatedPriceGateway", () => {
-    const estimatePrice = new GetEstimatedPriceGateway();
+
+    const estimatePrice = new GetEstimatedPriceGateway(new GetCalculatedDistanceGateway());
     it("Estimer le prix d'un trajet with valid ride type ", async () =>{
         const startAddress =  {
             long: 2.290084,
