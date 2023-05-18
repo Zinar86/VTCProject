@@ -6,7 +6,9 @@ import {SignIn} from "../../core/usecase/user/SignIn";
 import {UpdateUser} from "../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../adapters/gateways/sendgrid/SendGridEmailGateway";
-
+import dotenv from 'dotenv'
+dotenv.config();
+const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
 
 const userRepository = new MongodbUserRepository();
@@ -26,7 +28,7 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
             profilePictures: req.body.profilePictures,
         });
         await sendGridEmailGateway.send({
-            from: "nostradanar@outlook.com",
+            from: emailSender,
             to: user.userProperty.email,
             subject: "Welcome to the next generation",
             text: "Hello ...",
