@@ -12,13 +12,14 @@ export class DataGouvAddressGateway implements AddressGateway{
                 q : input,
                 lim : 1,
             }
+
         })
         return {
-            long: response.data.coordinates[0],
-            lat: response.data.coordinates[1],
-            streetAddress: response.data.properties.name,
-            city: response.data.properties.city,
-            zipCode:  response.data.properties.postcode,
+            long: response.data.features[0].geometry.coordinates[0],
+            lat: response.data.features[0].geometry.coordinates[1],
+            streetAddress: response.data.features[0].properties.name,
+            city: response.data.features[0].properties.city,
+            zipCode:  response.data.features[0].properties.postcode,
         }
     }
 }

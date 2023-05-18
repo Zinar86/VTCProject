@@ -28,8 +28,6 @@ export class GetEstimatedPriceGateway implements EstimatePriceGateway {
                 return (distance * ratePerKm);
             case RideType.Comfort :
                 return (distance * ratePerKm) + 10;
-            default :
-                throw new Error("RIDE_TYPE_UNDEFINED")
         }
 
     }
