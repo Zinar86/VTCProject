@@ -89,6 +89,11 @@ export class MongodbUserRepository implements UserRepository {
                     password: user.userProperty.password,
                     phoneNumber: user.userProperty.phoneNumber,
                     profilePictures: user.userProperty.profilePictures,
+                    rating : user.userProperty.rating,
+                    isAvailable : user.userProperty.isAvailable,
+                    position : user.userProperty.position,
+                    car : user.userProperty.car,
+                    type : user.userProperty.type,
                 }
             },
             {

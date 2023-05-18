@@ -12,7 +12,6 @@ export interface UserProperty {
     position : Address;
     rating : number[];
     car : Car[];
-    isAvailable: boolean;
     type: Role;
     phoneNumber : string;
     profilePictures : string;
@@ -35,7 +34,6 @@ export class User {
             ...props,
             id : v4(),
             rating : [],
-            isAvailable: true,
             position : {
                 long: 0,
                 lat: 0,
@@ -61,10 +59,5 @@ export class User {
        this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
-    }
-    verifyPassword(password: string){
-        if (password === this.userProperty.password) {
-            return true;
-        }
     }
 }
