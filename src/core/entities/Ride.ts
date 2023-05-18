@@ -3,7 +3,7 @@ import {RideType} from "../ValueObject/RideType";
 import {Address} from "../ValueObject/Address";
 import {v4} from "uuid";
 
-export interface RideProperty {
+export interface Ride {
     id: string;
     userId: string,
     startAddress: Address;
@@ -12,26 +12,3 @@ export interface RideProperty {
     paymentMethod: PaymentMethod;
     rideType: RideType;
     }
-
-export class Ride {
-    rideProperty: RideProperty;
-
-    constructor(rideProperties: RideProperty) {
-        this.rideProperty = rideProperties;
-    }
-
-    static async create(props: {
-        userId: string,
-        startAddress: Address,
-        endAddress: Address,
-        paymentMethod: PaymentMethod,
-        rideType: RideType,
-        priceEstimation : number,
-    }) {
-        return new Ride({
-            ...props,
-            id: v4(),
-
-        })
-    }
-}
