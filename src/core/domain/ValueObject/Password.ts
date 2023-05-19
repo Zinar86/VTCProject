@@ -3,7 +3,7 @@ export class Password {
     constructor(password : string){
         const passwordValidate: boolean = this.passwordValid(password)
         if(!passwordValidate){
-            throw new Error("PASSWORD_MUST_CONTAIN_SPECIAL_CHARACTER")
+            throw new Error("PASSWORD_MUST_CONTAIN_3_SPECIAL_CHARACTER")
         }
         this.value = password;
     }

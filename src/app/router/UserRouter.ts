@@ -37,7 +37,7 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
         return res.status(201).send(user);
     }
     catch (error){
-        return res.status(401).send(error)
+        return res.status(401).send(error.message)
     }
 })
 userRouter.use((req: AuthenticatedRequest, res, next)=>{
