@@ -1,6 +1,6 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {ResetPassword} from "../../usecase/user/passwords/ResetPassword";
-import {User} from "../../entities/User";
+import {User} from "../../domain/entities/User";
 
 describe("Unit - GeneratePasswordRecovery", ()=>{
     it("must update the password", async ()=>{

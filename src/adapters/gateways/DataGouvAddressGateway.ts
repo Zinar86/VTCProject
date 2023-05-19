@@ -1,5 +1,5 @@
 import {AddressGateway} from "../../core/gateways/AddressGateway";
-import {Address} from "../../core/ValueObject/Address";
+import {Address} from "../../core/domain/ValueObject/Address";
 import axios from "axios";
 
 

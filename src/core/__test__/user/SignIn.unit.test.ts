@@ -1,6 +1,6 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {SignIn} from "../../usecase/user/SignIn";
-import {User} from "../../entities/User";
+import {User} from "../../domain/entities/User";
 import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 
 describe("Unit - SignIn", () =>{

@@ -1,6 +1,6 @@
-import {User} from "../../core/entities/User";
+import {User} from "../../core/domain/entities/User";
 import * as mongoose from 'mongoose';
-import { UserRepository } from "../../core/repositories/UserRepository";
+import { UserRepository } from "../../core/domain/repositories/UserRepository";
 import { MongodbUserRepository } from "../repositories/mongodb/MongodbUserRepositories";
 import {Connection} from "mongoose";
 

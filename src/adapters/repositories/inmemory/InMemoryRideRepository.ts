@@ -1,5 +1,5 @@
-import {RideRepository} from "../../../core/repositories/RideRepository";
-import {Ride} from "../../../core/entities/Ride";
+import {RideRepository} from "../../../core/domain/repositories/RideRepository";
+import {Ride} from "../../../core/domain/entities/Ride";
 
 export class InMemoryRideRepository implements RideRepository {
     rideList : Ride[] = [];

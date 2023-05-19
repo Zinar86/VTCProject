@@ -1,4 +1,4 @@
-import {UserRepository} from "../../repositories/UserRepository";
+import {UserRepository} from "../../domain/repositories/UserRepository";
 
 export class GetUserById {
     userRepository : UserRepository;

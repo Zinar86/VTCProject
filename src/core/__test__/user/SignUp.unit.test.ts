@@ -3,13 +3,16 @@ import {SignUp} from "../../usecase/user/SignUp";
 import {GetUserById} from "../../usecase/user/GetUserById";
 import {UpdateUser} from "../../usecase/user/UpdateUser";
 import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
-import {User} from "../../entities/User";
+import {User} from "../../domain/entities/User";
 
 describe ("Unit - SignUp", () => {
-    it("doit créé un user", async () =>{
+    let signUp;
+    beforeAll(()=>{
         const userRepo = new InMemoryUserRepository();
         const passwordGateway = new InMemoryPasswordGateway();
-        const signUp = new SignUp(userRepo, passwordGateway);
+        signUp = new SignUp(userRepo, passwordGateway);
+    })
+    it("doit créé un user", async () =>{
         const user = await signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
@@ -21,9 +24,6 @@ describe ("Unit - SignUp", () => {
         expect(user.userProperty.firstName).toEqual("Nico")
     })
     it("should return an error if the password is too small", async () =>{
-        const userRepo = new InMemoryUserRepository();
-        const passwordGateway = new InMemoryPasswordGateway();
-        const signUp = new SignUp(userRepo, passwordGateway);
         const user = await signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
@@ -32,20 +32,17 @@ describe ("Unit - SignUp", () => {
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        expect(user).toThrow("the password must be greater than eight characters");
+        await expect(user).rejects.toThrow("PASSWORD_MUST_CONTAIN_SPECIAL_CHARACTER");
     })
     it("should return an error if the email not respect synthax of email", async ()=>{
-        const userRepo = new InMemoryUserRepository();
-        const passwordGateway = new InMemoryPasswordGateway();
-        const signUp = new SignUp(userRepo, passwordGateway);
-        const user = await User.create({
+        const user = await signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
-            email : "nir",
-            password : "01",
+            email : "nico",
+            password : "fan@rze4122@@rthytjtjtyj687;:!",
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        expect(user).toThrow("EMAIL_NO_VALID");
+        await expect(user).rejects.toThrow("EMAIL_NO_VALID");
     })
 })

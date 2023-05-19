@@ -1,5 +1,5 @@
 import {GetEstimatedPriceGateway} from "../gateways/GetEstimatedPriceGateway";
-import {RideType} from "../../core/ValueObject/RideType";
+import {RideType} from "../../core/domain/ValueObject/RideType";
 import {GetCalculatedDistanceGateway} from "../gateways/GetCalculatedDistanceGateway";
 
 describe ("Unit - GetEstimatedPriceGateway", () => {
