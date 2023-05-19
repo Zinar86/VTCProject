@@ -34,7 +34,6 @@ export class User {
     {
         return new User ({
             ...props,
-            password: new Password(props.password).value,
             email : new Email(props.email).value,
             id : v4(),
             rating : [],
