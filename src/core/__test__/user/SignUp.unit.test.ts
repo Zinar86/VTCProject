@@ -4,7 +4,7 @@ import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 import {User} from "../../domain/entities/User";
 
 describe ("Unit - SignUp", () => {
-    let signUp;
+    let signUp: SignUp;
     beforeAll(()=>{
         const userRepo = new InMemoryUserRepository();
         const passwordGateway = new InMemoryPasswordGateway();
@@ -15,19 +15,19 @@ describe ("Unit - SignUp", () => {
             firstName : "Nico",
             lastName : "Heeut",
             email : "nico@heuttt.fr",
-            password : "@!:",
+            password : "@!:abcdefgh@@%",
             phoneNumber : "02314587450124578657",
             profilePictures : "www.picture.com"
         })
         expect(user.userProperty.firstName).toEqual("Nico")
-        expect(user.userProperty.password).toEqual("@!:")
+        expect(user.userProperty.password).toEqual("@!:abcdefgh@@%")
     })
     it("should return an error if the password is not contain special character", async () =>{
-        const user: User = signUp.execute({
+        const user: Promise<User> = signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
             email : "nico@heuttt.fr",
-            password : "01",
+            password : "0123456789",
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
@@ -38,10 +38,21 @@ describe ("Unit - SignUp", () => {
             firstName : "Nico",
             lastName : "Heeut",
             email : "nico",
+            password : "@!:abcdefgh@@%",
+            phoneNumber : "0231458745",
+            profilePictures : "www.picture.com"
+        })
+        await expect(user).rejects.toThrow("EMAIL_NO_VALID");
+    })
+    it("should return an error if the password contain under 8 character", async ()=>{
+        const user = signUp.execute({
+            firstName : "Nico",
+            lastName : "Heeut",
+            email : "nico",
             password : "@!:",
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await expect(user).rejects.toThrow(Error);
+        await expect(user).rejects.toThrow("PASSWORD_MUST_CONTAIN_8_CHARACTER_MINIMUM");
     })
 })
