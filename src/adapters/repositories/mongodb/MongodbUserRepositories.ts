@@ -1,7 +1,7 @@
-import { User } from "../../../core/entities/User";
-import { UserRepository } from "../../../core/repositories/UserRepository";
+import { User } from "../../../core/domain/entities/User";
+import { UserRepository } from "../../../core/domain/repositories/UserRepository";
 import { UserModel } from "./models/UserModel";
-import {Role} from "../../../core/ValueObject/Role";
+import {Role} from "../../../core/domain/ValueObject/Role";
 
 export class MongodbUserRepository implements UserRepository {
     async getById(id: string): Promise<User> {

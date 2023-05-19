@@ -1,9 +1,9 @@
-import {PaymentMethod} from "../ValueObject/PaymentMethod";
-import {Address} from "../ValueObject/Address";
-import {Ride} from "../entities/Ride";
-import {RideType} from "../ValueObject/RideType";
+import {PaymentMethod} from "../domain/ValueObject/PaymentMethod";
+import {Address} from "../domain/ValueObject/Address";
+import {Ride} from "../domain/entities/Ride";
+import {RideType} from "../domain/ValueObject/RideType";
 import {InMemoryRideRepository} from "../../adapters/repositories/inmemory/InMemoryRideRepository";
-import {RideRepository} from "../repositories/RideRepository";
+import {RideRepository} from "../domain/repositories/RideRepository";
 import {v4} from "uuid";
 interface OrderRideInput  {
      id : string,

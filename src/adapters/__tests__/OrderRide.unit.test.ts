@@ -1,7 +1,7 @@
 import {OrderRide} from "../../core/usecase/OrderRide";
 import {v4} from "uuid";
-import {RideType} from "../../core/ValueObject/RideType";
-import {PaymentMethod} from "../../core/ValueObject/PaymentMethod";
+import {RideType} from "../../core/domain/ValueObject/RideType";
+import {PaymentMethod} from "../../core/domain/ValueObject/PaymentMethod";
 import {InMemoryRideRepository} from "../repositories/inmemory/InMemoryRideRepository";
 
 

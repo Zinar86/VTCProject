@@ -1,6 +1,6 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {GetUserById} from "../../usecase/user/GetUserById";
-import {User} from "../../entities/User";
+import {User} from "../../domain/entities/User";
 
 describe ("Unit - GetUserById", () => {
     it("doit recupéré un User via l'Id", async () =>{

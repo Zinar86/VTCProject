@@ -1,5 +1,5 @@
-import {UserRepository} from "../../repositories/UserRepository";
-import {User} from "../../entities/User";
+import {UserRepository} from "../../domain/repositories/UserRepository";
+import {User} from "../../domain/entities/User";
 import {PasswordGateway} from "../../gateways/PasswordGateway";
 export interface SignUpProps{
     firstName: string;
@@ -17,9 +17,6 @@ export class SignUp {
         this.passwordGateway = passwordGateway;
     }
     async execute( payload : SignUpProps){
-        if (payload.password.length <=8){
-            throw new TypeError("the password must be greater than eight characters");
-        }
         const hash = await this.passwordGateway.encrypt(payload.password);
 
         const user = User.create({

@@ -1,5 +1,5 @@
 import {CalculateDistanceGateway} from "../../core/gateways/CalculateDistanceGateway";
-import {Address} from "../../core/ValueObject/Address";
+import {Address} from "../../core/domain/ValueObject/Address";
 
 export class GetCalculatedDistanceGateway implements CalculateDistanceGateway{
     calculateDistance(startAddress: Address, endAddress: Address): number {

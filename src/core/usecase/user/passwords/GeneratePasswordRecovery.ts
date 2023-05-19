@@ -1,4 +1,4 @@
-import {UserRepository} from "../../../repositories/UserRepository";
+import {UserRepository} from "../../../domain/repositories/UserRepository";
 import {SendGridEmailGateway} from "../../../../adapters/gateways/sendgrid/SendGridEmailGateway";
 
 import dotenv from 'dotenv'

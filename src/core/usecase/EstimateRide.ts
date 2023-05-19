@@ -1,6 +1,6 @@
 import {GetEstimatedPriceGateway} from "../../adapters/gateways/GetEstimatedPriceGateway";
-import {RideType} from "../ValueObject/RideType";
-import {Address} from "../ValueObject/Address";
+import {RideType} from "../domain/ValueObject/RideType";
+import {Address} from "../domain/ValueObject/Address";
 
 export interface EstimateRideProps {
         startAddress: Address;
