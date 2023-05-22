@@ -13,12 +13,12 @@ export class GeneratePasswordRecovery {
         this.sendGridEmailGateway = sendGridEmailGateway;
     }
     async execute(email){
-        await this.sendGridEmailGateway.send({
-            from: emailSender,
-            to: email,
-            subject: "link for recovery email",
-            text: "link",
-            html: "<strong>VTC_PROJECT</strong>"
-        })
+            await this.sendGridEmailGateway.send({
+                from: emailSender,
+                to: email,
+                subject: "link for recovery email",
+                text: "link",
+                html: "<strong>VTC_PROJECT</strong>"
+            })
     }
 }

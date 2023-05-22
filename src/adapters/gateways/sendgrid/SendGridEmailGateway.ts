@@ -1,7 +1,9 @@
 import sgMail from "@sendgrid/mail";
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import {SendGridGateway} from "../../../core/gateways/SendGridGateway";
+
 dotenv.config();
-const apiKey = process.env.API_KEY_SENDGRID;
+const apiKey = process.env.JWT_KEY
 sgMail.setApiKey(apiKey);
 export interface Msg {
     to: string;
@@ -10,8 +12,14 @@ export interface Msg {
     text: string;
     html: string;
 }
-export class SendGridEmailGateway implements SendGridEmailGateway{
+export class SendGridEmailGateway implements SendGridGateway{
     async send(msg: Msg){
-        return await sgMail.send(msg);
+        try{
+            await sgMail.send(msg);
+        }
+        catch{
+            throw new Error("SEND_EMAIL_FAILED");
+        }
+
     }
 }

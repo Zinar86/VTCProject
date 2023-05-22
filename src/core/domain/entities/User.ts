@@ -2,7 +2,6 @@ import {Car} from "./Car";
 import {Address} from "../ValueObject/Address";
 import {Role} from "../ValueObject/Role";
 import {v4} from "uuid";
-import {Password} from "../ValueObject/Password";
 import {Email} from "../ValueObject/Email";
 
 export interface UserProperty {
@@ -11,7 +10,7 @@ export interface UserProperty {
     email : string;
     id: string;
     password : string;
-    position : Address;
+    position? : Address;
     rating : number[];
     car : Car[];
     type: Role;
@@ -37,13 +36,7 @@ export class User {
             email : new Email(props.email).value,
             id : v4(),
             rating : [],
-            position : {
-                long: 0,
-                lat: 0,
-                streetAddress: "",
-                city: "",
-                zipCode: "0"
-                },
+            position : null,
             car : [],
             type: Role.client,
         })

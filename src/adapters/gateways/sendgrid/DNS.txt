@@ -1,6 +1,0 @@
-em7173.nostradanar.com
-u33281984.wl235.sendgrid.net
-s1._domainkey.nostradanar.com
-s1.domainkey.u33281984.wl235.sendgrid.net
-s2._domainkey.nostradanar.com
-s2.domainkey.u33281984.wl235.sendgrid.net

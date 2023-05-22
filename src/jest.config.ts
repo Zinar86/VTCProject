@@ -10,6 +10,7 @@ const config: Config.InitialOptions = {
     "**/?(*.)+(spec|test).[tj]s?(x)"
   ],
   "collectCoverage": true,
-  "coverageReporters": ["json", "html"]
+  "coverageReporters": ["json", "html"],
+
 };
 export default config;
