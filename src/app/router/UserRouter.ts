@@ -6,7 +6,9 @@ import {SignIn} from "../../core/usecase/user/SignIn";
 import {UpdateUser} from "../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../adapters/gateways/sendgrid/SendGridEmailGateway";
+
 import dotenv from 'dotenv'
+import {GeneratePasswordRecovery} from "../../core/usecase/user/passwords/GeneratePasswordRecovery";
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -17,6 +19,7 @@ const signUp = new SignUp(userRepository, passwordGateway);
 const signIn = new SignIn(userRepository,passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 const sendGridEmailGateway = new SendGridEmailGateway();
+const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
 userRouter.post('/signup', async (req: Request, res: Response) => {
     try {
         const user = await signUp.execute({
@@ -72,4 +75,17 @@ userRouter.get('/getbyid', async (req: Request, res: Response)=>{
         throw new Error("USER_NOT_FOUND")
     }
     return res.status(200).send(user);
+})
+userRouter.post('/password_recovery',  async (req: Request, res: Response)=>{
+    try{
+        const user = await userRepository.getById(req.body.email);
+        if (!user){
+            throw new Error("USER_NOT_FOUND")
+        }
+        await generatePasswordRecovery.execute(req.body.email)
+        return res.status(200).send("send");
+    }
+    catch(error){
+        return res.status(401).send(error.message)
+    }
 })

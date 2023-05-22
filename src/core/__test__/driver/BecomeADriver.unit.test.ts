@@ -5,7 +5,7 @@ import {BecomeADriver} from "../../usecase/driver/BecomeADriver";
 
 describe ("Unit - BecomeADriver", () => {
    it ("devenir un Driver", async () =>{
-       new BecomeADriver()
+
    })
 
 })

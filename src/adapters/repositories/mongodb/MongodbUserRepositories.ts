@@ -62,13 +62,13 @@ export class MongodbUserRepository implements UserRepository {
                 };
             }),
             id: result.id,
-            position: {
+            position: result.position ? {
                 long: result.position.long,
                 lat: result.position.lat,
                 streetAddress: result.position.streetAddress,
                 city: result.position.city,
                 zipCode: result.position.zipCode
-            },
+            } : null,
             rating: result.rating,
             type: result.type as Role
         });
