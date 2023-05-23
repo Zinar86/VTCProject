@@ -1,7 +1,7 @@
 import {SendGridEmailGateway} from "../gateways/sendgrid/SendGridEmailGateway";
 describe('Integration - Sendgrid', ()=>{
 
-    it("must return a statusCode 200 after an email is sent", async ()=>{
+    it("should send a email", async ()=>{
         const sendGridEmailGateway = new SendGridEmailGateway();
         const result = sendGridEmailGateway.send({
             from: "nostradanar@outlook.com",
@@ -11,5 +11,16 @@ describe('Integration - Sendgrid', ()=>{
             html: "some html"
         })
         await expect(result).resolves.not.toThrow()
+    })
+    it("should not send a email", async ()=>{
+        const sendGridEmailGateway = new SendGridEmailGateway();
+        const result = sendGridEmailGateway.send({
+            from: "nostrok.com",
+            to: "noscom",
+            subject: "test",
+            text: "some text",
+            html: "some html"
+        })
+        await expect(result).rejects.toThrow()
     })
 })

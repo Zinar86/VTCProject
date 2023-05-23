@@ -1,14 +1,16 @@
 import {Request, Response, Router} from "express";
-import {MongodbUserRepository} from "../../adapters/repositories/mongodb/MongodbUserRepositories";
-import {BcryptPasswordGateway} from "../../adapters/gateways/bcrypt/BcryptPasswordGateway";
-import {SignUp} from "../../core/usecase/user/SignUp";
-import {SignIn} from "../../core/usecase/user/SignIn";
-import {UpdateUser} from "../../core/usecase/user/UpdateUser";
-import {AuthenticatedRequest} from "../config/AuthenticatedRequest";
-import {SendGridEmailGateway} from "../../adapters/gateways/sendgrid/SendGridEmailGateway";
+import {MongodbUserRepository} from "../../../adapters/repositories/mongodb/MongodbUserRepositories";
+import {BcryptPasswordGateway} from "../../../adapters/gateways/bcrypt/BcryptPasswordGateway";
+import {SignUp} from "../../../core/usecase/user/SignUp";
+import {SignIn} from "../../../core/usecase/user/SignIn";
+import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
+import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
+import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
 
 import dotenv from 'dotenv'
-import {GeneratePasswordRecovery} from "../../core/usecase/user/passwords/GeneratePasswordRecovery";
+import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
+import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
+import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -20,6 +22,8 @@ const signIn = new SignIn(userRepository,passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 const sendGridEmailGateway = new SendGridEmailGateway();
 const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
+const jwt = new Jwt(process.env.JWT_KEY);
+const userApiResponseMapper = new UserApiResponseMapper();
 userRouter.post('/signup', async (req: Request, res: Response) => {
     try {
         const user = await signUp.execute({
@@ -52,11 +56,16 @@ userRouter.use((req: AuthenticatedRequest, res, next)=>{
     return next();
 })
 userRouter.post('/signin', async (req: Request, res: Response) => {
-    const result = await signIn.execute({
+    const user = await signIn.execute({
         email: req.body.email,
         password: req.body.password
     })
-    return res.status(200).send(result);
+    const token = jwt.generate(user);
+    const toApiResponse = userApiResponseMapper.fromDomain(user)
+    return res.status(200).send({
+        ...toApiResponse,
+        token
+    });
 })
 userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
     await updateUser.execute({
@@ -69,19 +78,20 @@ userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
     })
     return res.status(200).send("user_update");
 })
-userRouter.get('/getbyid', async (req: Request, res: Response)=>{
-    const user = await userRepository.getById(req.body.id);
-    if(!user){
-        throw new Error("USER_NOT_FOUND")
-    }
-    return res.status(200).send(user);
-})
-userRouter.post('/password_recovery',  async (req: Request, res: Response)=>{
+userRouter.get('/:id', async (req: Request, res: Response)=>{
     try{
-        const user = await userRepository.getById(req.body.email);
-        if (!user){
-            throw new Error("USER_NOT_FOUND")
-        }
+        const user = await userRepository.getById(req.params.id);
+        const toApiResponse = userApiResponseMapper.fromDomain(user);
+        return res.status(200).send(toApiResponse);
+    }
+    catch(error){
+        return res.status(400).send({
+            message: error.message
+        })
+    }
+})
+userRouter.post('/password/recovery',  async (req: Request, res: Response)=>{
+    try{
         await generatePasswordRecovery.execute(req.body.email)
         return res.status(200).send("send");
     }

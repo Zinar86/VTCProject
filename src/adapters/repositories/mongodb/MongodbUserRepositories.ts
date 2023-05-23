@@ -35,7 +35,7 @@ export class MongodbUserRepository implements UserRepository {
                 zipCode: result.position.zipCode
             },
             rating: result.rating,
-            type: result.type as Role
+            role: result.type as Role
         });
 
     }
@@ -70,7 +70,7 @@ export class MongodbUserRepository implements UserRepository {
                 zipCode: result.position.zipCode
             } : null,
             rating: result.rating,
-            type: result.type as Role
+            role: result.type as Role
         });
     }
     async save(user: User): Promise<User> {
@@ -90,7 +90,7 @@ export class MongodbUserRepository implements UserRepository {
                     rating : user.userProperty.rating,
                     position : user.userProperty.position,
                     car : user.userProperty.car,
-                    type : user.userProperty.type,
+                    type : user.userProperty.role,
                 }
             },
             {
@@ -108,7 +108,7 @@ export class MongodbUserRepository implements UserRepository {
         userModel.rating = user.userProperty.rating;
         userModel.position = user.userProperty.position;
         userModel.car = user.userProperty.car;
-        userModel.type = user.userProperty.type;
+        userModel.type = user.userProperty.role;
         return user;
     }
 }

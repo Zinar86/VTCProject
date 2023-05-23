@@ -1,21 +1,25 @@
 import {UserRepository} from "../../../domain/repositories/UserRepository";
-import {SendGridEmailGateway} from "../../../../adapters/gateways/sendgrid/SendGridEmailGateway";
+import {EmailGateway} from "../../../gateways/EmailGateway";
 
-import dotenv from 'dotenv'
-dotenv.config();
-const emailSender = process.env.EMAIL_SENDER
 
 export class GeneratePasswordRecovery {
     userRepository : UserRepository;
-    sendGridEmailGateway : SendGridEmailGateway;
-    constructor(userRepository : UserRepository, sendGridEmailGateway : SendGridEmailGateway) {
+    emailGateway : EmailGateway;
+    constructor(userRepository : UserRepository, emailGateway : EmailGateway) {
         this.userRepository = userRepository;
-        this.sendGridEmailGateway = sendGridEmailGateway;
+        this.emailGateway = emailGateway;
     }
-    async execute(email){
-            await this.sendGridEmailGateway.send({
-                from: emailSender,
-                to: email,
+    async execute(payload:{
+        email: string,
+        sender: string
+    }){
+        const user = await this.userRepository.getByEmail(payload.email);
+        if (!user){
+            throw new Error("USER_NOT_FOUND")
+        }
+            await this.emailGateway.send({
+                from: payload.sender,
+                to: payload.email,
                 subject: "link for recovery email",
                 text: "link",
                 html: "<strong>VTC_PROJECT</strong>"

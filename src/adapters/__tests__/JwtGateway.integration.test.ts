@@ -14,7 +14,7 @@ describe("Integration - JwtGateway", () =>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        jwt = new Jwt();
+        jwt = new Jwt("azerty123045");
     })
     it("should generate jwt token", async () =>{
         const token = jwt.generate(user)

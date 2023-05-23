@@ -13,7 +13,7 @@ export interface UserProperty {
     position? : Address;
     rating : number[];
     car : Car[];
-    type: Role;
+    role: Role;
     phoneNumber : string;
     profilePictures : string;
 }
@@ -38,7 +38,7 @@ export class User {
             rating : [],
             position : null,
             car : [],
-            type: Role.client,
+            role: Role.client,
         })
     }
 
