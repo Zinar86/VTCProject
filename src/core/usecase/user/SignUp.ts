@@ -28,7 +28,7 @@ export class SignUp {
             phoneNumber : payload.phoneNumber,
             profilePictures : payload.profilePictures
         });
-        await this.userRepository.save(user);
+        await this.userRepository.update(user);
         return user;
     }
 }

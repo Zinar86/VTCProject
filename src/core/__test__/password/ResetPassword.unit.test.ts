@@ -14,7 +14,7 @@ describe("Unit - GeneratePasswordRecovery", ()=>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         });
-        await userRepo.save(user);
+        await userRepo.update(user);
         await resetPassword.execute({
             newPassword : "1234",
             id: user.userProperty.id

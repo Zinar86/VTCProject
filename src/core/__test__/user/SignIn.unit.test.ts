@@ -16,7 +16,7 @@ describe("Unit - SignIn", () =>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         });
-        await userRepo.save(user);
+        await userRepo.update(user);
         const result = await signIn.execute({
             email: "az@er.fr",
             password: "azerty"
@@ -35,7 +35,7 @@ describe("Unit - SignIn", () =>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         });
-        await userRepo.save(user);
+        await userRepo.update(user);
         const result= signIn.execute({
             email: "az@er.fr",
             password: "123"

@@ -2,6 +2,7 @@ import {UserRepository} from "../../../domain/repositories/UserRepository";
 export interface ResetPasswordProps {
     newPassword: string;
     id: string;
+    securityCode: string;
 }
 export class ResetPassword {
     userRepository : UserRepository;
@@ -10,12 +11,11 @@ export class ResetPassword {
     }
     async execute( payload: ResetPasswordProps ){
         const user = await this.userRepository.getById(payload.id)
-        user.update({
-            password : payload.newPassword,
-            lastName: user.userProperty.lastName,
-            phoneNumber: user.userProperty.phoneNumber,
-            profilePictures: user.userProperty.profilePictures,
-            firstName: user.userProperty.firstName
-        })
+        if (payload.securityCode !== user.userProperty.securityCode){
+            throw new Error("INVALID_SECURITY_CODE")
+        }
+        user.userProperty.password = payload.newPassword;
+        user.userProperty.securityCode = null;
+        await this.userRepository.update(user);
     }
 }

@@ -1,7 +1,6 @@
 import {UserRepository} from "../../../domain/repositories/UserRepository";
 import {EmailGateway} from "../../../gateways/EmailGateway";
-
-
+import {v4} from "uuid";
 export class GeneratePasswordRecovery {
     userRepository : UserRepository;
     emailGateway : EmailGateway;
@@ -17,6 +16,10 @@ export class GeneratePasswordRecovery {
         if (!user){
             throw new Error("USER_NOT_FOUND")
         }
+
+        user.userProperty.securityCode = v4();
+        await this.userRepository.update(user)
+
             await this.emailGateway.send({
                 from: payload.sender,
                 to: payload.email,

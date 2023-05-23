@@ -14,7 +14,7 @@ describe ("Unit - GetUserById", () => {
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await userRepo.save(user);
+        await userRepo.update(user);
         const userId = user.userProperty.id;
         const userCheck = await getUserById.execute(userId);
         expect(userId).toEqual(userCheck.userProperty.id)

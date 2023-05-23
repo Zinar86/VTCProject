@@ -73,7 +73,7 @@ export class MongodbUserRepository implements UserRepository {
             role: result.type as Role
         });
     }
-    async save(user: User): Promise<User> {
+    async update(user: User): Promise<User> {
         await UserModel.findOneAndUpdate(
             {
                 id: user.userProperty.id

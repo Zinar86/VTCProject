@@ -16,6 +16,7 @@ export interface UserProperty {
     role: Role;
     phoneNumber : string;
     profilePictures : string;
+    securityCode?: string;
 }
 export class User {
     userProperty : UserProperty;
@@ -39,15 +40,17 @@ export class User {
             position : null,
             car : [],
             role: Role.client,
+            securityCode: null
         })
     }
 
     update(props: {
         firstName: string,
         lastName: string,
-        password : string,
-        phoneNumber : string,
-        profilePictures : string,
+        password: string,
+        phoneNumber: string,
+        profilePictures: string,
+        securityCode: string
     })
     {
        this.userProperty.firstName = props.firstName;
@@ -55,6 +58,7 @@ export class User {
        this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
+       this.userProperty.securityCode = props.securityCode
     }
 
 }

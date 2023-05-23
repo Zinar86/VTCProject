@@ -6,7 +6,6 @@ import {SignIn} from "../../../core/usecase/user/SignIn";
 import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
-
 import dotenv from 'dotenv'
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
@@ -75,6 +74,7 @@ userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
         phoneNumber: req.body.phoneNumber,
         profilePictures: req.body.profilePictures,
         id: req.user.id,
+        securityCode: null,
     })
     return res.status(200).send("user_update");
 })
