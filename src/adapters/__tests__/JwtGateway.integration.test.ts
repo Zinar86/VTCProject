@@ -20,12 +20,9 @@ describe("Integration - JwtGateway", () =>{
         const token = jwt.generate(user)
         expect(typeof token).toEqual("string")
     })
-
     it("should decoded a token", async ()=>{
         const token = jwt.generate(user);
-        const result = jwt.decoded(token)
-        const decodedUser = result.user.userProperty
-        expect(decodedUser).toEqual(user.userProperty)
-
+        const result = jwt.decoded(token);
+        expect(result.email).toEqual(user.userProperty.email);
     })
 })

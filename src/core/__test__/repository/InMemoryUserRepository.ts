@@ -3,7 +3,7 @@ import {User, UserProperty} from "../../domain/entities/User";
 
 export class InMemoryUserRepository implements UserRepository{
     listUser: User[] = [];
-    async save(user: User): Promise<User> {
+    async update(user: User): Promise<User> {
         this.listUser.push(user)
         return user;
     }

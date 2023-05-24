@@ -18,14 +18,6 @@ export class MongodbUserRepository implements UserRepository {
             profilePictures: result.profilePictures,
             lastName: result.lastName,
             firstName: result.firstName,
-            car: result.car.map((car)=>{
-                return {
-                    id: car.id,
-                    model: car.model,
-                    picture: car.picture,
-                    registration: car.registration
-                };
-            }),
             id: result.id,
             position: {
                 long: result.position.long,
@@ -53,14 +45,6 @@ export class MongodbUserRepository implements UserRepository {
             profilePictures: result.profilePictures,
             lastName: result.lastName,
             firstName: result.firstName,
-            car: result.car.map((car)=>{
-                return {
-                    id: car.id,
-                    model: car.model,
-                    picture: car.picture,
-                    registration: car.registration
-                };
-            }),
             id: result.id,
             position: result.position ? {
                 long: result.position.long,
@@ -73,7 +57,7 @@ export class MongodbUserRepository implements UserRepository {
             role: result.type as Role
         });
     }
-    async save(user: User): Promise<User> {
+    async update(user: User): Promise<User> {
         await UserModel.findOneAndUpdate(
             {
                 id: user.userProperty.id
@@ -89,7 +73,6 @@ export class MongodbUserRepository implements UserRepository {
                     profilePictures: user.userProperty.profilePictures,
                     rating : user.userProperty.rating,
                     position : user.userProperty.position,
-                    car : user.userProperty.car,
                     type : user.userProperty.role,
                 }
             },
@@ -97,9 +80,7 @@ export class MongodbUserRepository implements UserRepository {
                 upsert: true,
             }
         )
-
         return user
     }
-
 }
 

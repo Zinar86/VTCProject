@@ -7,6 +7,7 @@ export interface UpdateUserInput {
     password : string;
     phoneNumber : string;
     profilePictures : string;
+    securityCode: string;
 }
 export class UpdateUser {
     userRepository : UserRepository;
@@ -22,7 +23,8 @@ export class UpdateUser {
             password : input.password,
             phoneNumber : input.phoneNumber,
             profilePictures : input.profilePictures,
+            securityCode: input.securityCode
         });
-        await this.userRepository.save(user);
+        await this.userRepository.update(user);
     }
 }

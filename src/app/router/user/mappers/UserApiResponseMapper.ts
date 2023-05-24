@@ -1,6 +1,9 @@
 import {User} from "../../../../core/domain/entities/User";
-export class UserApiResponseMapper {
-    fromDomain(user: User){
+import {Mapper} from "../../../../core/domain/Mapper";
+import {UserResponse} from "../../../../core/domain/entities/UserResponse";
+
+export class UserApiResponseMapper implements Mapper<User, UserResponse> {
+    fromDomain(user: User) : UserResponse {
         return {
             email: user.userProperty.email,
             firstName: user.userProperty.firstName,
@@ -10,7 +13,8 @@ export class UserApiResponseMapper {
             rating: user.userProperty.rating,
             role: user.userProperty.role,
             phoneNumber: user.userProperty.phoneNumber,
-            profilePictures: user.userProperty.profilePictures
+            profilePictures: user.userProperty.profilePictures,
+            token: user.userProperty.token,
         }
     }
 }

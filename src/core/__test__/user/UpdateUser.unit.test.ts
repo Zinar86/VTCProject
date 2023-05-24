@@ -14,7 +14,7 @@ describe("Unit - UpdateUser", () =>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await userRepo.save(user);
+        await userRepo.update(user);
         await updateUser.execute({
             id: user.userProperty.id,
             firstName: "Marc",
@@ -22,6 +22,7 @@ describe("Unit - UpdateUser", () =>{
             password : "1234",
             phoneNumber : user.userProperty.phoneNumber,
             profilePictures : user.userProperty.profilePictures,
+            securityCode:null
         })
         expect(user.userProperty.password).toEqual("1234")
     })

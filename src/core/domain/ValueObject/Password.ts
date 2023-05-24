@@ -3,7 +3,7 @@ export class Password {
     constructor(password : string){
         const passwordValidate: boolean = this.passwordValid(password)
         if(!passwordValidate){
-            throw new Error("PASSWORD_MUST_CONTAIN_3_SPECIAL_CHARACTER")
+            throw new Error("Minimum eight characters, at least one uppercase letter, one lowercase letter and one number")
         }
         if (password.length <= 8){
             throw new Error("PASSWORD_MUST_CONTAIN_8_CHARACTER_MINIMUM")
@@ -11,7 +11,7 @@ export class Password {
         this.value = password;
     }
     passwordValid(password: string){
-        const regexp = new RegExp(/^.*[~!@#$%^*\-_=+[{\]}\/;:,.?]{3}$/m);
+        const regexp = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/m);
         return regexp.test(password)
     }
 }
