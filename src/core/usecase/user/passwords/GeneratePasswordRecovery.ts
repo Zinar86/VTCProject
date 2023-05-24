@@ -27,5 +27,6 @@ export class GeneratePasswordRecovery {
                 text: "link",
                 html: "<strong>VTC_PROJECT</strong>"
             })
+        return user;
     }
 }

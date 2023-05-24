@@ -24,7 +24,7 @@ describe("Unit - GeneratePasswordRecovery", () => {
             email: "nostradanar@outlook.com",
             sender: "nostradanar@outlook.com"
         })
-        console.log("=====>", user.userProperty.securityCode)
+        console.log("securityCode=====>", user.userProperty.securityCode)
         expect(typeof user.userProperty.securityCode).toEqual("string")
     })
 })

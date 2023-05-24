@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import {EmailGateway} from "../../../core/gateways/EmailGateway";
 import {Msg} from "../../../core/domain/ValueObject/Msg";
 dotenv.config();
-const apiKey = "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"
+const apiKey = process.env.API_KEY_SENDGRID
 sgMail.setApiKey(apiKey);
 export class SendGridEmailGateway implements EmailGateway {
     async send(msg: Msg){

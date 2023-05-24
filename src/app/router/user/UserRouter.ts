@@ -10,6 +10,8 @@ import dotenv from 'dotenv'
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
+import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
+
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -23,6 +25,7 @@ const sendGridEmailGateway = new SendGridEmailGateway();
 const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
 const jwt = new Jwt(process.env.JWT_KEY);
 const userApiResponseMapper = new UserApiResponseMapper();
+const resetPassword = new ResetPassword(userRepository, passwordGateway);
 userRouter.post('/signup', async (req: Request, res: Response) => {
     try {
         const user = await signUp.execute({
@@ -40,31 +43,48 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
             text: "Hello ...",
             html: "<strong>VTC_PROJECT</strong>"
         })
-        return res.status(201).send(user);
+        const toApiResponse = userApiResponseMapper.fromDomain(user);
+        return res.status(201).send(toApiResponse);
     }
     catch (error){
-        return res.status(401).send(error.message)
+        return res.status(401).send({
+            message: error.message
+        })
+    }
+})
+userRouter.post('/signin', async (req: Request, res: Response) => {
+    try{
+        const user = await signIn.execute({
+            email: req.body.email,
+            password: req.body.password
+        })
+        user.userProperty.token = jwt.generate(user);
+        const toApiResponse = userApiResponseMapper.fromDomain(user);
+        return res.status(200).send({
+            ...toApiResponse
+        });
+    }
+    catch(error){
+        return res.status(401).send({
+            message: error.message
+        })
     }
 })
 userRouter.use((req: AuthenticatedRequest, res, next)=>{
-    //via token
-    req.user =  {
-        id: "bb26d3ba-f677-4ac8-9384-701ae9dc5b61",
-        email: "fgf"
+    try{
+        const token = req.header('access_key')!;
+        const verifyToken = jwt.decoded(token);
+        req.user =  {
+            id: verifyToken.id,
+            email: verifyToken.email
+        }
+        return next();
     }
-    return next();
-})
-userRouter.post('/signin', async (req: Request, res: Response) => {
-    const user = await signIn.execute({
-        email: req.body.email,
-        password: req.body.password
-    })
-    const token = jwt.generate(user);
-    const toApiResponse = userApiResponseMapper.fromDomain(user)
-    return res.status(200).send({
-        ...toApiResponse,
-        token
-    });
+    catch(error){
+        return res.status(401).send({
+            message: error.message
+        })
+    }
 })
 userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
     await updateUser.execute({
@@ -90,12 +110,34 @@ userRouter.get('/:id', async (req: Request, res: Response)=>{
         })
     }
 })
-userRouter.post('/password/recovery',  async (req: Request, res: Response)=>{
+userRouter.post('/password/recovery', async (req: Request, res: Response)=>{
     try{
-        await generatePasswordRecovery.execute(req.body.email)
-        return res.status(200).send("send");
+        const user =await generatePasswordRecovery.execute({
+            email: req.body.email,
+            sender: emailSender
+        })
+        console.log("======>>>>>>", user.userProperty.securityCode)
+        return res.status(200).send(user.userProperty.securityCode);
     }
     catch(error){
-        return res.status(401).send(error.message)
+        return res.status(401).send({
+            message: error.message
+        })
+    }
+})
+userRouter.post('/password/reset/:id', async (req: Request, res: Response)=>{
+    try {
+        const user = await resetPassword.execute({
+            newPassword: req.body.newPAssword,
+            id: req.params.id,
+            securityCode: req.body.securityCode
+        })
+        console.log("======>>>>>>", user.userProperty.securityCode)
+        return res.status(200).send("password_reset");
+    }
+    catch(error){
+        return res.status(401).send({
+            message: error.message
+        })
     }
 })

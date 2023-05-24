@@ -18,14 +18,6 @@ export class MongodbUserRepository implements UserRepository {
             profilePictures: result.profilePictures,
             lastName: result.lastName,
             firstName: result.firstName,
-            car: result.car.map((car)=>{
-                return {
-                    id: car.id,
-                    model: car.model,
-                    picture: car.picture,
-                    registration: car.registration
-                };
-            }),
             id: result.id,
             position: {
                 long: result.position.long,
@@ -53,14 +45,6 @@ export class MongodbUserRepository implements UserRepository {
             profilePictures: result.profilePictures,
             lastName: result.lastName,
             firstName: result.firstName,
-            car: result.car.map((car)=>{
-                return {
-                    id: car.id,
-                    model: car.model,
-                    picture: car.picture,
-                    registration: car.registration
-                };
-            }),
             id: result.id,
             position: result.position ? {
                 long: result.position.long,
@@ -89,7 +73,6 @@ export class MongodbUserRepository implements UserRepository {
                     profilePictures: user.userProperty.profilePictures,
                     rating : user.userProperty.rating,
                     position : user.userProperty.position,
-                    car : user.userProperty.car,
                     type : user.userProperty.role,
                 }
             },
@@ -107,7 +90,6 @@ export class MongodbUserRepository implements UserRepository {
         userModel.profilePictures = user.userProperty.profilePictures;
         userModel.rating = user.userProperty.rating;
         userModel.position = user.userProperty.position;
-        userModel.car = user.userProperty.car;
         userModel.type = user.userProperty.role;
         return user;
     }

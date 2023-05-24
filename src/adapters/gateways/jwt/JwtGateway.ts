@@ -16,7 +16,6 @@ export class Jwt implements JwtGateway {
             expiresIn: '1d'
         });
     }
-
     decoded(token: string): JwtPayload {
         const result = jwt.verify(token, this.jwtKey);
         return result as JwtPayload

@@ -12,11 +12,11 @@ export interface UserProperty {
     password : string;
     position? : Address;
     rating : number[];
-    car : Car[];
     role: Role;
     phoneNumber : string;
     profilePictures : string;
     securityCode?: string;
+    token?: string;
 }
 export class User {
     userProperty : UserProperty;
@@ -38,7 +38,6 @@ export class User {
             id : v4(),
             rating : [],
             position : null,
-            car : [],
             role: Role.client,
             securityCode: null
         })
@@ -58,7 +57,7 @@ export class User {
        this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
-       this.userProperty.securityCode = props.securityCode
+       this.userProperty.securityCode = props.securityCode;
     }
 
 }
