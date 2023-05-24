@@ -1,19 +1,20 @@
 import sgMail from "@sendgrid/mail";
-import dotenv from 'dotenv'
-dotenv.config();
-const apiKey = process.env.API_KEY_SENDGRID
+import dotenv from 'dotenv';
+import {EmailGateway} from "../../../core/gateways/EmailGateway";
+import {Msg} from "../../../core/domain/ValueObject/Msg";
 
+dotenv.config();
+const apiKey = ""
 sgMail.setApiKey(apiKey);
 
-export interface Msg {
-    to: string;
-    from: string;
-    subject: string;
-    text: string;
-    html: string;
-}
-export class SendGridEmailGateway implements SendGridEmailGateway{
+export class SendGridEmailGateway implements EmailGateway{
     async send(msg: Msg){
-        return await sgMail.send(msg);
+        try{
+            await sgMail.send(msg);
+        }
+        catch{
+            throw new Error("SEND_EMAIL_FAILED");
+        }
+
     }
 }

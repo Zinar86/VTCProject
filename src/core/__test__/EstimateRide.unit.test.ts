@@ -1,6 +1,6 @@
 import {EstimateRide} from "../usecase/EstimateRide";
 import {GetEstimatedPriceGateway} from "../../adapters/gateways/GetEstimatedPriceGateway";
-import {RideType} from "../ValueObject/RideType";
+import {RideType} from "../domain/ValueObject/RideType";
 import {GetCalculatedDistanceGateway} from "../../adapters/gateways/GetCalculatedDistanceGateway";
 
 describe("Unit - EstimatePrice", () => {

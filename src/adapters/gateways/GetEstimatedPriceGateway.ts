@@ -1,8 +1,8 @@
 import {EstimatePriceGateway} from "../../core/gateways/EstimatePriceGateway";
-import {RideType} from "../../core/ValueObject/RideType";
+import {RideType} from "../../core/domain/ValueObject/RideType";
 import dotenv from "dotenv"
 import {GetCalculatedDistanceGateway} from "./GetCalculatedDistanceGateway";
-import {Address} from "../../core/ValueObject/Address";
+import {Address} from "../../core/domain/ValueObject/Address";
 
 dotenv.config()
 
@@ -28,8 +28,6 @@ export class GetEstimatedPriceGateway implements EstimatePriceGateway {
                 return (distance * ratePerKm);
             case RideType.Comfort :
                 return (distance * ratePerKm) + 10;
-            default :
-                throw new Error("RIDE_TYPE_UNDEFINED")
         }
 
     }

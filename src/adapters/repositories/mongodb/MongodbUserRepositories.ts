@@ -1,7 +1,7 @@
-import { User } from "../../../core/entities/User";
-import { UserRepository } from "../../../core/repositories/UserRepository";
+import { User } from "../../../core/domain/entities/User";
+import { UserRepository } from "../../../core/domain/repositories/UserRepository";
 import { UserModel } from "./models/UserModel";
-import {Role} from "../../../core/ValueObject/Role";
+import {Role} from "../../../core/domain/ValueObject/Role";
 
 export class MongodbUserRepository implements UserRepository {
     async getById(id: string): Promise<User> {
@@ -34,9 +34,8 @@ export class MongodbUserRepository implements UserRepository {
                 city: result.position.city,
                 zipCode: result.position.zipCode
             },
-            isAvailable: result.isAvailable,
             rating: result.rating,
-            type: result.type as Role
+            role: result.type as Role
         });
 
     }
@@ -63,16 +62,15 @@ export class MongodbUserRepository implements UserRepository {
                 };
             }),
             id: result.id,
-            position: {
+            position: result.position ? {
                 long: result.position.long,
                 lat: result.position.lat,
                 streetAddress: result.position.streetAddress,
                 city: result.position.city,
                 zipCode: result.position.zipCode
-            },
-            isAvailable: result.isAvailable,
+            } : null,
             rating: result.rating,
-            type: result.type as Role
+            role: result.type as Role
         });
     }
     async save(user: User): Promise<User> {
@@ -89,13 +87,16 @@ export class MongodbUserRepository implements UserRepository {
                     password: user.userProperty.password,
                     phoneNumber: user.userProperty.phoneNumber,
                     profilePictures: user.userProperty.profilePictures,
+                    rating : user.userProperty.rating,
+                    position : user.userProperty.position,
+                    car : user.userProperty.car,
+                    type : user.userProperty.role,
                 }
             },
             {
                 upsert: true,
             }
         )
-
 
         return user
     }

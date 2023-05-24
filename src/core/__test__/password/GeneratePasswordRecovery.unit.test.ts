@@ -8,5 +8,6 @@ describe("Unit - GeneratePasswordRecovery", () => {
         const sendGridEmailGateway = new SendGridEmailGateway()
         const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
         await generatePasswordRecovery.execute("heutte.nicolas@laposte.net")
+
     })
 })

@@ -1,4 +1,4 @@
-import {UserRepository} from "../../../repositories/UserRepository";
+import {UserRepository} from "../../../domain/repositories/UserRepository";
 export interface ResetPasswordProps {
     newPassword: string;
     id: string;

@@ -33,7 +33,6 @@ const userSchema = new mongoose.Schema({
     },
     rating :[ {
         type:Number,
-        required: true,
     }],
     isAvailable: {
         type: Boolean,

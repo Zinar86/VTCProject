@@ -1,10 +1,10 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {SignIn} from "../../usecase/user/SignIn";
-import {User} from "../../entities/User";
+import {User} from "../../domain/entities/User";
 import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
 
 describe("Unit - SignIn", () =>{
-    it("doit verifier si le mot de passe est valide",async ()=>{
+    it("must verify if password is valid",async ()=>{
         const userRepo = new InMemoryUserRepository();
         const passwordGateway = new InMemoryPasswordGateway();
         const signIn = new SignIn(userRepo, passwordGateway);
@@ -23,11 +23,11 @@ describe("Unit - SignIn", () =>{
         })
         expect(result).toEqual(user);
     })
-    it("doit retourner une erreur si le mot de passe est invalid", async ()=>{
+    it("must return an error if the password is invalid", async ()=>{
         const userRepo = new InMemoryUserRepository();
         const passwordGateway = new InMemoryPasswordGateway();
         const signIn = new SignIn(userRepo, passwordGateway);
-        const user = await User.create({
+        const user: User = User.create({
             firstName : "dede",
             lastName : "lolo",
             email : "az@er.fr",
@@ -36,11 +36,10 @@ describe("Unit - SignIn", () =>{
             profilePictures : "www.picture.com"
         });
         await userRepo.save(user);
-        const result = await signIn.execute({
+        const result= signIn.execute({
             email: "az@er.fr",
             password: "123"
         })
-        console.log(result)
-        expect(result).toThrow(Error);
+        await expect(result).rejects.toThrow("Authentication failed");
     })
 })

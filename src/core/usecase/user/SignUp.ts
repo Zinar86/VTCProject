@@ -1,6 +1,7 @@
-import {UserRepository} from "../../repositories/UserRepository";
-import {User} from "../../entities/User";
+import {UserRepository} from "../../domain/repositories/UserRepository";
+import {User} from "../../domain/entities/User";
 import {PasswordGateway} from "../../gateways/PasswordGateway";
+import {Password} from "../../domain/ValueObject/Password";
 export interface SignUpProps{
     firstName: string;
     lastName : string;
@@ -17,7 +18,8 @@ export class SignUp {
         this.passwordGateway = passwordGateway;
     }
     async execute( payload : SignUpProps){
-        const hash = await this.passwordGateway.encrypt(payload.password);
+        const password = new Password(payload.password).value;
+        const hash = await this.passwordGateway.encrypt(password);
         const user = User.create({
             firstName : payload.firstName,
             lastName : payload.lastName,
