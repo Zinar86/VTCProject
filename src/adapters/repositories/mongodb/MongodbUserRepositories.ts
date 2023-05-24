@@ -95,20 +95,10 @@ export class MongodbUserRepository implements UserRepository {
                 upsert: true,
             }
         )
-        const userModel = new UserModel();
-        userModel.id = user.userProperty.id;
-        userModel.firstName = user.userProperty.firstName;
-        userModel.lastName = user.userProperty.lastName;
-        userModel.email = user.userProperty.email;
-        userModel.password = user.userProperty.password;
-        userModel.phoneNumber = user.userProperty.phoneNumber;
-        userModel.profilePictures = user.userProperty.profilePictures;
-        userModel.rating = user.userProperty.rating;
-        userModel.isAvailable = user.userProperty.isAvailable;
-        userModel.position = user.userProperty.position;
-        userModel.car = user.userProperty.car;
-        userModel.type = user.userProperty.type;
-        return user;
+
+
+        return user
     }
+
 }
 

@@ -31,10 +31,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true, 
     },
-    rating : {
-        type: Number,
+    rating :[ {
+        type:Number,
         required: true,
-    },
+    }],
     isAvailable: {
         type: Boolean,
         required: true,
