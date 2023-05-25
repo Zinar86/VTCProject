@@ -1,4 +1,3 @@
-import {Car} from "./Car";
 import {Address} from "../ValueObject/Address";
 import {Role} from "../ValueObject/Role";
 import {v4} from "uuid";

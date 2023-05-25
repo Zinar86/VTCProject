@@ -2,7 +2,7 @@ import {UserRepository} from "../../domain/repositories/UserRepository";
 import {User} from "../../domain/entities/User";
 import {PasswordGateway} from "../../gateways/PasswordGateway";
 import {Password} from "../../domain/ValueObject/Password";
-import {Usecase} from "../ride/Usecase";
+import {Usecase} from "../Usecase";
 export interface SignUpProps{
     firstName: string;
     lastName : string;

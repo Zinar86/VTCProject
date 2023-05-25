@@ -1,7 +1,7 @@
-import {EstimateRide} from "../usecase/ride/EstimateRide";
-import {GetEstimatedPriceGateway} from "../../adapters/gateways/estimateRide/GetEstimatedPriceGateway";
-import {RideType} from "../domain/ValueObject/RideType";
-import {GetCalculatedDistanceGateway} from "../../adapters/gateways/estimateRide/GetCalculatedDistanceGateway";
+import {EstimateRide} from "../../usecase/ride/EstimateRide";
+import {GetEstimatedPriceGateway} from "../../../adapters/gateways/estimateRide/GetEstimatedPriceGateway";
+import {RideType} from "../../domain/ValueObject/RideType";
+import {GetCalculatedDistanceGateway} from "../../../adapters/gateways/estimateRide/GetCalculatedDistanceGateway";
 
 describe("Unit - EstimatePrice", () => {
     it("doit retourner une estimation du prix d'une course d'un point A a un point B", async ()=>{

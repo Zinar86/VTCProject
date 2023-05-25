@@ -1,6 +1,6 @@
 import {UserRepository} from "../../domain/repositories/UserRepository";
 import {PasswordGateway} from "../../gateways/PasswordGateway";
-import {Usecase} from "../ride/Usecase";
+import {Usecase} from "../Usecase";
 import {User} from "../../domain/entities/User";
 export interface SignInProps{
     email: string,

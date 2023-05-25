@@ -1,5 +1,5 @@
 import {UserRepository} from "../../domain/repositories/UserRepository";
-import {Usecase} from "../ride/Usecase";
+import {Usecase} from "../Usecase";
 import {User} from "../../domain/entities/User";
 export interface GetUserByIdCommand {
     userId: string

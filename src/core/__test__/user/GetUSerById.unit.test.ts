@@ -16,7 +16,9 @@ describe ("Unit - GetUserById", () => {
         })
         await userRepo.update(user);
         const userId = user.userProperty.id;
-        const userCheck = await getUserById.execute(userId);
+        const userCheck = await getUserById.execute({
+            userId:userId
+        });
         expect(userId).toEqual(userCheck.userProperty.id)
     })
 })
