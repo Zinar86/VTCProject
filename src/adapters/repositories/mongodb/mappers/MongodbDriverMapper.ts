@@ -1,7 +1,5 @@
 import {Driver} from "../../../../core/domain/entities/Driver";
-
-
-export class MongodbDriverMapper{
+export class MongodbDriverMapper {
     toDomain(driver){
         return new Driver({
             id: driver.id,

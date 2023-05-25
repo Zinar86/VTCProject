@@ -1,8 +1,6 @@
 import {BecomeADriver} from "../../usecase/driver/BecomeADriver";
 import {InMemoryDriverRepository} from "../repository/InMemoryDriverRepository";
 import {DriverRepository} from "../../domain/repositories/DriverRepository";
-
-
 describe ("Unit - BecomeADriver", () => {
    it ("devenir un Driver", async () =>{
        const driverRepository : DriverRepository = new InMemoryDriverRepository()
@@ -21,13 +19,6 @@ describe ("Unit - BecomeADriver", () => {
            kbis: "kbis76544",
            carRegistrationDocument: "P911BJ914KM",
        })
-       //expect(driver.driverProperty.driversLicense).toEqual("23564578")
-       /*expect(driver.driverProperty.car).toEqual({
-           id:"911",
-           model:"porshe",
-           picture:"photo",
-           registration:"BJ-914-KM",
-       })*/
        expect(driver.driverProperty).toEqual({
            id: "86100",
            car: {

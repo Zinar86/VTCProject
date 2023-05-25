@@ -1,8 +1,8 @@
-import {EstimatePriceGateway} from "../../core/gateways/EstimatePriceGateway";
-import {RideType} from "../../core/domain/ValueObject/RideType";
+import {EstimatePriceGateway} from "../../../core/gateways/EstimatePriceGateway";
+import {RideType} from "../../../core/domain/ValueObject/RideType";
 import dotenv from "dotenv"
 import {GetCalculatedDistanceGateway} from "./GetCalculatedDistanceGateway";
-import {Address} from "../../core/domain/ValueObject/Address";
+import {Address} from "../../../core/domain/ValueObject/Address";
 
 dotenv.config()
 

@@ -1,5 +1,5 @@
-import {DataGouvAddressGateway} from "../gateways/DataGouvAddressGateway";
-import {GetCalculatedDistanceGateway} from "../gateways/GetCalculatedDistanceGateway";
+import {DataGouvAddressGateway} from "../gateways/estimateRide/DataGouvAddressGateway";
+import {GetCalculatedDistanceGateway} from "../gateways/estimateRide/GetCalculatedDistanceGateway";
 
 describe ("Unit - GetCalculatedDistanceGetway", () => {
     const calculerDistance = new GetCalculatedDistanceGateway();
