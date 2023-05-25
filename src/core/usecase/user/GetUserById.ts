@@ -1,12 +1,16 @@
 import {UserRepository} from "../../domain/repositories/UserRepository";
+import {Usecase} from "../Usecase";
+import {User} from "../../domain/entities/User";
+export interface GetUserByIdCommand {
+    userId: string
+}
+export class GetUserById implements Usecase<GetUserByIdCommand, User>{
+    constructor(private userRepository : UserRepository) {
+    }
 
-export class GetUserById {
-    userRepository : UserRepository;
-    constructor(userRepository : UserRepository) {
-        this.userRepository = userRepository;
+    async execute(payload: GetUserByIdCommand): Promise<User>{
+        const { userId } = payload
+        return await this.userRepository.getById(userId);
     }
-    async execute(id: string){
-        const user= this.userRepository.getById(id);
-        return await user;
-    }
+
 }
