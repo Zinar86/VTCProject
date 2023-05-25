@@ -1,9 +1,7 @@
-
 import {DriverModel} from "./models/DriverModel";
 import {MongodbDriverMapper} from "./mappers/MongodbDriverMapper";
 import {DriverRepository} from "../../../core/domain/repositories/DriverRepository";
 import {Driver} from "../../../core/domain/entities/Driver";
-
 export class MongodbDriverRepository implements DriverRepository {
     driverMapper = new MongodbDriverMapper()
     async getById(id: string): Promise<Driver> {
@@ -35,10 +33,6 @@ export class MongodbDriverRepository implements DriverRepository {
                 upsert: true,
             }
         )
-
-
         return driver;
     }
-
-
 }

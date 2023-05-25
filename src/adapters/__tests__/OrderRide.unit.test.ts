@@ -1,4 +1,4 @@
-import {OrderRide} from "../../core/usecase/OrderRide";
+import {OrderRide} from "../../core/usecase/ride/OrderRide";
 import {v4} from "uuid";
 import {RideType} from "../../core/domain/ValueObject/RideType";
 import {PaymentMethod} from "../../core/domain/ValueObject/PaymentMethod";

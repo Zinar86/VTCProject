@@ -1,4 +1,4 @@
-import {DataGouvAddressGateway} from "../gateways/DataGouvAddressGateway";
+import {DataGouvAddressGateway} from "../gateways/estimateRide/DataGouvAddressGateway";
 import axios from "axios";
 
 describe ("Unit - DataGouvAddressGateway", () => {
