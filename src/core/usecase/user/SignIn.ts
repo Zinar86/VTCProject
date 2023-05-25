@@ -1,10 +1,13 @@
 import {UserRepository} from "../../domain/repositories/UserRepository";
 import {PasswordGateway} from "../../gateways/PasswordGateway";
+import {Usecase} from "../Usecase";
+import {User} from "../../domain/entities/User";
 export interface SignInProps{
     email: string,
     password: string
 }
-export class SignIn {
+export class SignIn implements Usecase<SignInProps, User> {
+
     userRepository : UserRepository;
     passwordGateway : PasswordGateway;
     constructor(userRepository : UserRepository, passwordGateway: PasswordGateway,) {

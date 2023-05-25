@@ -1,6 +1,6 @@
-import{DriverRepository} from "../../repositories/DriverRepository";
-import {Driver} from "../../entities/Driver";
-import {BecomeADriver} from "../../usecase/driver/BecomeADriver";
+import {DriverRepository} from "../../domain/repositories/DriverRepository";
+import {Driver} from "../../domain/entities/Driver";
+
 
 export class InMemoryDriverRepository implements DriverRepository{
     listDriver: Driver[] = [];
