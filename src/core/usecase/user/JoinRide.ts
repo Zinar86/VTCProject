@@ -8,5 +8,4 @@ export class JoinRide implements Usecase<JoinRideProps, Ride>{
     execute(payload?: JoinRideProps): Ride{
         return undefined;
     }
-
 }

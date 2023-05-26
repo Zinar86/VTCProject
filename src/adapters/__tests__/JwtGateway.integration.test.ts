@@ -1,7 +1,6 @@
 import {Jwt} from "../gateways/jwt/JwtGateway";
 import {User} from "../../core/domain/entities/User";
 
-import dotenv from 'dotenv';
 describe("Integration - JwtGateway", () =>{
     let user: User;
     let jwt : Jwt;

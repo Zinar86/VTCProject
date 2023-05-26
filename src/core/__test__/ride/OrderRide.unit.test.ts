@@ -1,8 +1,8 @@
-import {OrderRide} from "../../core/usecase/ride/OrderRide";
+import {OrderRide} from "../../usecase/ride/OrderRide";
 import {v4} from "uuid";
-import {RideType} from "../../core/domain/ValueObject/RideType";
-import {PaymentMethod} from "../../core/domain/ValueObject/PaymentMethod";
-import {InMemoryRideRepository} from "../repositories/inmemory/InMemoryRideRepository";
+import {RideType} from "../../domain/ValueObject/RideType";
+import {PaymentMethod} from "../../domain/ValueObject/PaymentMethod";
+import {InMemoryRideRepository} from "../../../adapters/repositories/inmemory/InMemoryRideRepository";
 
 
 describe ("Unit - OrderRide", () => {
