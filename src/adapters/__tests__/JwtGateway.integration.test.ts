@@ -1,6 +1,22 @@
 import {Jwt} from "../gateways/jwt/JwtGateway";
 import {User} from "../../core/domain/entities/User";
 
+jest.mock("jsonwebtoken", ()=>{
+    return {
+        sign: jest.fn().mockImplementation(()=>{
+            return "aaaa"
+        }),
+        verify: jest.fn().mockImplementation( ()=>{
+            return {firstName : "John",
+                lastName : "dooo",
+                email : "johndo@outlook.com",
+                password : "@!:arafezfe,:;!",
+                phoneNumber : "0231458745",
+                profilePictures : "www.picture.com"}
+        })
+    }
+});
+
 describe("Integration - JwtGateway", () =>{
     let user: User;
     let jwt : Jwt;
