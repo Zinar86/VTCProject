@@ -18,7 +18,7 @@ describe ("Unit - OrderRide", () => {
             rideType: RideType.Eco,
         }
         const rideRepo = new InMemoryRideRepository()
-        const ride = new OrderRide(rideRepo);
+        const orderRide = new OrderRide(rideRepo);
         expect(newRide.userId).toEqual("marchal");
     });
 })

@@ -1,10 +1,10 @@
 import {PaymentMethod} from "../../domain/ValueObject/PaymentMethod";
 import {Address} from "../../domain/ValueObject/Address";
-import {Ride} from "../../domain/entities/Ride";
 import {RideType} from "../../domain/ValueObject/RideType";
-import {InMemoryRideRepository} from "../../../adapters/repositories/inmemory/InMemoryRideRepository";
 import {RideRepository} from "../../domain/repositories/RideRepository";
 import {v4} from "uuid";
+import {Usecase} from "../Usecase";
+import {Ride} from "../../domain/entities/Ride";
 interface OrderRideInput  {
      id : string,
      userId : string
@@ -13,16 +13,12 @@ interface OrderRideInput  {
      priceEstimation : number,
      paymentMethod : PaymentMethod,
      rideType : RideType,
-
 }
-
-
-export class OrderRide {
+export class OrderRide implements Usecase<any, any>{
     rideRepo : RideRepository
     constructor(rideRepo : RideRepository) {
         this.rideRepo = rideRepo
     }
-
     async execute( payload : OrderRideInput) {
        return await this.rideRepo.save({
             id : v4(),
