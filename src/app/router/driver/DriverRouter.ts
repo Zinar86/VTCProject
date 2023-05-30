@@ -3,15 +3,17 @@ import {DriverRepository} from "../../../core/domain/repositories/DriverReposito
 import {InMemoryDriverRepository} from "../../../core/__test__/repository/InMemoryDriverRepository";
 import {BecomeADriver} from "../../../core/usecase/driver/BecomeADriver";
 import { DriverApiResponseMapper } from "../user/mappers/DriverApiResponseMapper";
+import {CreateCar} from "../../../core/usecase/driver/CreateCar";
 
 export const driverRouter : Router = Router();
 
 const driverRepository : DriverRepository = new InMemoryDriverRepository()
-const becomeadriver = new BecomeADriver(driverRepository)
+const becomeDriver = new BecomeADriver(driverRepository)
 const driverApiResponseMapper = new DriverApiResponseMapper();
+
 driverRouter.post("/become/" ,async (req: Request, res: Response)=>{
  try {
-    const driver = await becomeadriver.execute({
+    const driver = await becomeDriver.execute({
         id: req.body.id,
         car: req.body.car,
         identityId: req.body.identityId,

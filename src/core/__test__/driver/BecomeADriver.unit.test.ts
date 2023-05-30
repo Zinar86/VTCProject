@@ -2,7 +2,7 @@ import {BecomeADriver} from "../../usecase/driver/BecomeADriver";
 import {InMemoryDriverRepository} from "../repository/InMemoryDriverRepository";
 import {DriverRepository} from "../../domain/repositories/DriverRepository";
 describe ("Unit - BecomeADriver", () => {
-   it ("devenir un Driver", async () =>{
+   it ("Become a driver", async () =>{
        const driverRepository : DriverRepository = new InMemoryDriverRepository()
        const becomeDriver : BecomeADriver = new BecomeADriver(driverRepository)
        const driver = await becomeDriver.execute ({
