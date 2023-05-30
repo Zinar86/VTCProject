@@ -31,12 +31,12 @@ describe ("Integration - DataGouvAddressGateway", () => {
                 ],
             },
         };
-        nock(`https://api-adresse.data.gouv.fr/search/?q=8%20rue%20du%20pont%20Neuilly%20sur%20seine%2092200&lim=1`)
+        nock(`https://api-adresse.data.gouv.fr/search/?q=8+rue+du+pont+Neuilly+sur+seine+92200&lim=1`)
             .get('/')
             .reply(200, responseMock)
         ;
         //WHEN
-        const result = await dataGouvAddressGateway.getAddress('8%20rue%20du%20pont%20Neuilly%20sur%20seine%2092200');
+        const result = await dataGouvAddressGateway.getAddress('8+rue+du+pont+Neuilly+sur+seine+92200');
         //THEN
         expect(result.zipCode).toEqual("80000");
     });
