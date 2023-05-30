@@ -19,3 +19,4 @@ const carSchema = new mongoose.Schema({
         type: String
     }
 })
+export const CarModel = mongoose.model('car', carSchema);
