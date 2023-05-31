@@ -13,7 +13,7 @@ export class InMemoryDriverRepository implements DriverRepository{
             driver.driverProperty.id === id
         )
         if (!driver){
-            throw new Error("USER_NOT_FOUND")
+            throw new Error("DRIVER_NOT_FOUND")
         }
         return driver;
     }

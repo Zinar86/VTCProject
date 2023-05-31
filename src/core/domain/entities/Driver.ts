@@ -2,7 +2,7 @@ import {Car} from "./Car";
 
 export interface DriverProperty {
     id: string;
-    car : Car;
+    car : string;
     identityId: string,
     driversLicense: string,
     insurance: string,
@@ -16,7 +16,7 @@ export class Driver {
   }
   static create(props:{
       id: string;
-      car: Car;
+      car: string;
       identityId: string;
       driversLicense: string;
       insurance: string;
@@ -25,5 +25,7 @@ export class Driver {
   }){
         return new Driver(props)
   }
-
+  saveCar(id: string){
+     this.driverProperty.car = id;
+  }
 }

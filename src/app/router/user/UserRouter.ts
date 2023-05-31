@@ -1,4 +1,5 @@
 import {Request, Response, Router} from "express";
+import * as dotenv from 'dotenv';
 import {MongodbUserRepository} from "../../../adapters/repositories/mongodb/MongodbUserRepositories";
 import {BcryptPasswordGateway} from "../../../adapters/gateways/bcrypt/BcryptPasswordGateway";
 import {SignUp} from "../../../core/usecase/user/SignUp";
@@ -6,7 +7,6 @@ import {SignIn} from "../../../core/usecase/user/SignIn";
 import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
-import * as dotenv from 'dotenv'
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
@@ -43,8 +43,12 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
             text: "Hello ...",
             html: "<strong>VTC_PROJECT</strong>"
         })
+        const token = jwt.generate(user);
         const toApiResponse = userApiResponseMapper.fromDomain(user);
-        return res.status(201).send(toApiResponse);
+        return res.status(201).send({
+            ...toApiResponse,
+            token
+        });
     }
     catch (error){
         return res.status(401).send({

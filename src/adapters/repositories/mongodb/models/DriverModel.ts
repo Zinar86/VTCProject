@@ -7,10 +7,8 @@ const driverSchema = new mongoose.Schema({
         unique: true,
     },
     car : {
-        id: String,
-        registration: String,
-        model: String,
-        picture: String,
+        type: String,
+        required: true,
     },
     identityId: {
         type: String,

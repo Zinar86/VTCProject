@@ -9,13 +9,7 @@ export class MongodbDriverMapper {
             insurance: driver.insurance,
             carRegistrationDocument: driver.carRegistrationDocument,
             identityId: driver.identityId,
-            car: new Car({
-                id: driver.car.id,
-                model: driver.car.model,
-                picture: driver.car.picture,
-                registration: driver.car.registration,
-                seats: driver.car.seats
-            })
+            car: driver.car
         })
     }
 }
