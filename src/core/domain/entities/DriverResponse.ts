@@ -2,7 +2,7 @@ import { Car } from "./Car";
 
 export interface DriverResponse {
     id: string;
-    car : Car;
+    car : string;
     identityId: string,
     driversLicense: string,
     insurance: string,

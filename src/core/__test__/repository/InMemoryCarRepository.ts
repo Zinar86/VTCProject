@@ -7,5 +7,8 @@ export class InMemoryCarRepository implements CarRepository {
         this.carList.push(car)
         return car;
     }
+    getById(id: string): Promise<Car> {
+        return Promise.resolve(undefined);
+    }
 
 }

@@ -1,19 +1,34 @@
 import {InMemoryCarRepository} from "../repository/InMemoryCarRepository";
 import {CreateCar} from "../../usecase/driver/CreateCar";
-
+import {InMemoryDriverRepository} from "../repository/InMemoryDriverRepository";
+import {Driver} from "../../domain/entities/Driver";
 describe("Unit - CreateCar", () => {
     let carRepo;
-    beforeEach(() => {
+    let driverRepo;
+    let driver;
+    beforeEach(async () => {
         carRepo = new InMemoryCarRepository();
+        driverRepo = new InMemoryDriverRepository();
+        driver = await Driver.create({
+            id:"111",
+            car:"",
+            identityId:"",
+            kbis:"",
+            insurance:"",
+            driversLicense:"",
+            carRegistrationDocument:""
+        })
+        driverRepo.save(driver);
     })
     it("Must create a car", async () => {
-        const createCar = new CreateCar(carRepo);
+        const createCar = new CreateCar( carRepo, driverRepo );
         const result = await createCar.execute({
             picture: "",
             registration: "",
             seats: 10,
-            model: ""
+            model: "",
+            driverId:"111",
         })
-    expect(result.carProps.seats).toEqual(10)
+    expect(result.carProps.seats).toEqual(10);
     })
 })

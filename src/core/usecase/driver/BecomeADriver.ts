@@ -5,7 +5,7 @@ import {Car} from "../../domain/entities/Car";
 
 export interface BecomeDriverInput{
     id: string;
-    car: Car;
+    carId: string;
     identityId: string;
     driversLicense: string;
     insurance: string;
@@ -20,7 +20,7 @@ export class BecomeADriver {
     async execute(input:BecomeDriverInput) :Promise<Driver> {
         const driver: Driver = Driver.create({
             id: input.id,
-            car: input.car,
+            car: "",
             identityId: input.identityId,
             driversLicense: input.driversLicense,
             insurance: input.insurance,

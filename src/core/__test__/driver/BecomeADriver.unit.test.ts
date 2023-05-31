@@ -7,12 +7,7 @@ describe ("Unit - BecomeADriver", () => {
        const becomeDriver : BecomeADriver = new BecomeADriver(driverRepository)
        const driver = await becomeDriver.execute ({
            id: "86100",
-           car: {
-               id:"911",
-               model:"porshe",
-               picture:"photo",
-               registration:"BJ-914-KM",
-           },
+           carId: "",
            identityId: "123455667",
            driversLicense: "23564578",
            insurance: "Axa",
@@ -21,12 +16,7 @@ describe ("Unit - BecomeADriver", () => {
        })
        expect(driver.driverProperty).toEqual({
            id: "86100",
-           car: {
-               id:"911",
-               model:"porshe",
-               picture:"photo",
-               registration:"BJ-914-KM",
-           },
+           car: "",
            identityId: "123455667",
            driversLicense: "23564578",
            insurance: "Axa",

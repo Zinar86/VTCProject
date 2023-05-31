@@ -3,7 +3,8 @@
         "rootDir": "src",
         "outDir": "dist",
         "types": ["node", "jest"],
-        "baseUrl": "./src"
+        "baseUrl": "./src",
+        "esModuleInterop": true,
     },
     "exclude": ["node_modules", "jest.config.ts"]
 }

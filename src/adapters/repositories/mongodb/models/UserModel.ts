@@ -60,13 +60,10 @@ const userSchema = new mongoose.Schema({
             required: false,
         }
     },
-    car : [{
-        id: String,
-        registration: String,
-        model: String,
-        picture: String,
-
-    }],
+    car : {
+        type: String,
+        required: false,
+    },
     type: {
         type: String,
         required: true,

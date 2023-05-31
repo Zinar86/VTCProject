@@ -1,12 +1,12 @@
 import { User } from "../../../core/domain/entities/User";
 import { UserRepository } from "../../../core/domain/repositories/UserRepository";
 import { UserModel } from "./models/UserModel";
-import {MongodbUserMapper} from "./mappers/MongodbUserMapper";
+import {MongodbUserMapper, MongodbUserMapperProps} from "./mappers/MongodbUserMapper";
 
 export class MongodbUserRepository implements UserRepository {
     private mongodbUserMapper = new MongodbUserMapper();
     async getById(id: string): Promise<User> {
-        const result = await UserModel.findOne({
+        const result: MongodbUserMapperProps = await UserModel.findOne({
             id: id
         });
         if (!result){
@@ -15,7 +15,7 @@ export class MongodbUserRepository implements UserRepository {
         return this.mongodbUserMapper.toDomain(result);
     }
     async getByEmail(email: string): Promise<User> {
-        const result = await UserModel.findOne({
+        const result: MongodbUserMapperProps = await UserModel.findOne({
             email: email
         });
         if (!result){

@@ -20,6 +20,6 @@ const carSchema = new mongoose.Schema({
     },
     seat: {
         type: Number
-    }
+    },
 })
 export const CarModel = mongoose.model('car', carSchema);
