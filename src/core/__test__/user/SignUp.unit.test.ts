@@ -1,13 +1,13 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {SignUp} from "../../usecase/user/SignUp";
-import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
+import {PasswordGateway} from "../gateways/PasswordGateway";
 import {User} from "../../domain/entities/User";
 
 describe ("Unit - SignUp", () => {
     let signUp: SignUp;
     beforeAll(()=>{
         const userRepo = new InMemoryUserRepository();
-        const passwordGateway = new InMemoryPasswordGateway();
+        const passwordGateway = new PasswordGateway();
         signUp = new SignUp(userRepo, passwordGateway);
     })
     it("doit créé un user", async () =>{

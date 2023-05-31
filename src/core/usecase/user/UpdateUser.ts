@@ -1,4 +1,6 @@
 import {UserRepository} from "../../domain/repositories/UserRepository";
+import {Usecase} from "../Usecase";
+import {User} from "../../domain/entities/User";
 
 export interface UpdateUserInput {
     id: string;
@@ -9,12 +11,12 @@ export interface UpdateUserInput {
     profilePictures : string;
     securityCode: string;
 }
-export class UpdateUser {
+export class UpdateUser implements Usecase<UpdateUserInput, User>{
     userRepository : UserRepository;
     constructor(userRepository : UserRepository) {
         this.userRepository = userRepository;
     }
-    async execute(input: UpdateUserInput){
+    async execute(input: UpdateUserInput): Promise<User>{
         const user = await this.userRepository.getById(input.id);
 
         user.update({
@@ -26,5 +28,6 @@ export class UpdateUser {
             securityCode: input.securityCode
         });
         await this.userRepository.update(user);
+        return user;
     }
 }

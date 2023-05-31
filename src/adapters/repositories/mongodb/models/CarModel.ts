@@ -17,6 +17,9 @@ const carSchema = new mongoose.Schema({
     },
     picture : {
         type: String
+    },
+    seat: {
+        type: Number
     }
 })
 export const CarModel = mongoose.model('car', carSchema);

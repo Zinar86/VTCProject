@@ -14,7 +14,6 @@ export class UserApiResponseMapper implements Mapper<User, UserResponse> {
             role: user.userProperty.role,
             phoneNumber: user.userProperty.phoneNumber,
             profilePictures: user.userProperty.profilePictures,
-            token: user.userProperty.token,
         }
     }
 }

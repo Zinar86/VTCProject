@@ -1,16 +1,17 @@
 import {Mapper} from "../../../core/domain/Mapper";
-import { AxiosResponse } from "axios";
 import {AddressResponse} from "../../../core/domain/ValueObject/AddressResponse";
+import {DataGouvAddressApiResponse} from "../estimateRide/DataGouvAddressGateway";
 
-
-export class DataGouvAddressResponseMapper implements Mapper< AxiosResponse, AddressResponse>{
-    fromDomain(input: AxiosResponse): AddressResponse {
+export class DataGouvAddressResponseMapper implements Mapper< AddressResponse, DataGouvAddressApiResponse >{
+    toDomain(input: DataGouvAddressApiResponse): AddressResponse {
         return {
-            long: input.data.features[0].geometry.coordinates[0],
-            lat: input.data.features[0].geometry.coordinates[1],
-            streetAddress: input.data.features[0].properties.name,
-            city: input.data.features[0].properties.city,
-            zipCode:  input.data.features[0].properties.postcode
+            long: input.features[0].geometry.coordinates[0],
+            lat: input.features[0].geometry.coordinates[1],
+            streetAddress: input.features[0].properties.name,
+            city: input.features[0].properties.city,
+            zipCode:  input.features[0].properties.postcode
         }
     }
+
+
 }

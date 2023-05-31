@@ -22,5 +22,20 @@ export class MongodbCarRepository implements CarRepository{
         )
         return car
     }
+   async getById(id: string): Promise<Car> {
+        const car = await CarModel.findOne({
+            id: id
+        });
+        if (!car){
+            throw new Error("USER_NOT_FOUND");
+        }
+        return new Car({
+            id: car.id,
+            picture: car.picture,
+            model: car.model,
+            registration: car.registration,
+            seats: car.seat
+        });
+    }
 
 }

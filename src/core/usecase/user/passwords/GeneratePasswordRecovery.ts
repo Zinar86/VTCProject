@@ -12,21 +12,20 @@ export class GeneratePasswordRecovery {
         email: string,
         sender: string
     }){
-        const user = await this.userRepository.getByEmail(payload.email);
+        const user= await this.userRepository.getByEmail(payload.email);
         if (!user){
             throw new Error("USER_NOT_FOUND")
         }
-
-        user.userProperty.securityCode = v4();
+        const securityCode= v4()
         await this.userRepository.update(user)
 
-            await this.emailGateway.send({
-                from: payload.sender,
-                to: payload.email,
-                subject: "link for recovery email",
-                text: "link",
-                html: "<strong>VTC_PROJECT</strong>"
-            })
-        return user;
+        await this.emailGateway.send({
+            from: payload.sender,
+            to: payload.email,
+            subject: "link for recovery email",
+            text: securityCode,
+            html: "<strong>VTC_PROJECT</strong>"
+        })
+        return securityCode;
     }
 }

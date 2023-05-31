@@ -1,4 +1,5 @@
 import {Driver} from "../../../../core/domain/entities/Driver";
+import {Car} from "../../../../core/domain/entities/Car";
 export class MongodbDriverMapper {
     toDomain(driver){
         return new Driver({
@@ -8,12 +9,13 @@ export class MongodbDriverMapper {
             insurance: driver.insurance,
             carRegistrationDocument: driver.carRegistrationDocument,
             identityId: driver.identityId,
-            car: {
+            car: new Car({
                 id: driver.car.id,
                 model: driver.car.model,
                 picture: driver.car.picture,
-                registration: driver.car.registration
-            }
+                registration: driver.car.registration,
+                seats: driver.car.seats
+            })
         })
     }
 }

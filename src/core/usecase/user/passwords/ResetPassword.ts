@@ -15,12 +15,9 @@ export class ResetPassword {
     }
     async execute( payload: ResetPasswordProps ){
         const user = await this.userRepository.getById(payload.id)
-        if (payload.securityCode !== user.userProperty.securityCode){
-            throw new Error("INVALID_SECURITY_CODE")
-        }
         const password = new Password(payload.newPassword).value;
-        user.userProperty.password = await this.passwordGateway.encrypt(password);
-        user.userProperty.securityCode = null;
+        const passwordHash = await this.passwordGateway.encrypt(password);
+        await user.resetPassword(payload.securityCode, passwordHash)
         await this.userRepository.update(user);
         return user;
     }

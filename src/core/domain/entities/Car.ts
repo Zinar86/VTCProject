@@ -5,7 +5,7 @@ export interface CarProps {
     registration : string;
     model: string;
     picture : string;
-    seats?: number;
+    seats: number;
 }
 export class Car {
     carProps: CarProps;
@@ -16,11 +16,22 @@ export class Car {
         registration : string;
         model: string;
         picture : string;
-        seats?: number;
+        seats: number;
     }){
         return new Car({
             ...props,
             id: v4()
         })
+    }
+    update(props :{
+        registration : string,
+        model: string,
+        picture : string,
+        seats?: number,
+    }){
+        this.carProps.registration = props.registration,
+        this.carProps.model = props.model,
+        this.carProps.picture = props.picture,
+        this.carProps.seats = props.seats
     }
 }

@@ -1,9 +1,10 @@
 import { User } from "../../../core/domain/entities/User";
 import { UserRepository } from "../../../core/domain/repositories/UserRepository";
 import { UserModel } from "./models/UserModel";
-import {Role} from "../../../core/domain/ValueObject/Role";
+import {MongodbUserMapper} from "./mappers/MongodbUserMapper";
 
 export class MongodbUserRepository implements UserRepository {
+    private mongodbUserMapper = new MongodbUserMapper();
     async getById(id: string): Promise<User> {
         const result = await UserModel.findOne({
             id: id
@@ -11,25 +12,7 @@ export class MongodbUserRepository implements UserRepository {
         if (!result){
             throw new Error("USER_NOT_FOUND");
         }
-        return new User({
-            email: result.email,
-            password: result.password,
-            phoneNumber: result.phoneNumber,
-            profilePictures: result.profilePictures,
-            lastName: result.lastName,
-            firstName: result.firstName,
-            id: result.id,
-            position: {
-                long: result.position.long,
-                lat: result.position.lat,
-                streetAddress: result.position.streetAddress,
-                city: result.position.city,
-                zipCode: result.position.zipCode
-            },
-            rating: result.rating,
-            role: result.type as Role
-        });
-
+        return this.mongodbUserMapper.toDomain(result);
     }
     async getByEmail(email: string): Promise<User> {
         const result = await UserModel.findOne({
@@ -38,24 +21,7 @@ export class MongodbUserRepository implements UserRepository {
         if (!result){
             throw new Error("USER_NOT_FOUND")
         }
-        return new User({
-            email: result.email,
-            password: result.password,
-            phoneNumber: result.phoneNumber,
-            profilePictures: result.profilePictures,
-            lastName: result.lastName,
-            firstName: result.firstName,
-            id: result.id,
-            position: result.position ? {
-                long: result.position.long,
-                lat: result.position.lat,
-                streetAddress: result.position.streetAddress,
-                city: result.position.city,
-                zipCode: result.position.zipCode
-            } : null,
-            rating: result.rating,
-            role: result.type as Role
-        });
+        return this.mongodbUserMapper.toDomain(result);
     }
     async update(user: User): Promise<User> {
         await UserModel.findOneAndUpdate(

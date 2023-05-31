@@ -15,7 +15,6 @@ export interface UserProperty {
     phoneNumber : string;
     profilePictures : string;
     securityCode?: string;
-    token?: string;
 }
 export class User {
     userProperty : UserProperty;
@@ -58,5 +57,11 @@ export class User {
        this.userProperty.profilePictures = props.profilePictures;
        this.userProperty.securityCode = props.securityCode;
     }
-
+    async resetPassword(securityCode: string, newPassword: string) {
+        if (securityCode != this.userProperty.securityCode) {
+            throw new Error("INVALID_SECURITY_CODE")
+        }
+        this.userProperty.password = newPassword;
+        this.userProperty.securityCode = null;
+    }
 }

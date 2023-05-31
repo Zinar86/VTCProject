@@ -6,7 +6,7 @@ import {SignIn} from "../../../core/usecase/user/SignIn";
 import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv'
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
@@ -58,10 +58,11 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
             email: req.body.email,
             password: req.body.password
         })
-        user.userProperty.token = jwt.generate(user);
+        const token = jwt.generate(user);
         const toApiResponse = userApiResponseMapper.fromDomain(user);
         return res.status(200).send({
-            ...toApiResponse
+            ...toApiResponse,
+            token
         });
     }
     catch(error){
@@ -86,8 +87,8 @@ userRouter.use((req: AuthenticatedRequest, res, next)=>{
         })
     }
 })
-userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
-    await updateUser.execute({
+userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
+    const user = await updateUser.execute({
         password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -96,7 +97,8 @@ userRouter.put('/update', async (req: AuthenticatedRequest, res: Response) => {
         id: req.user.id,
         securityCode: null,
     })
-    return res.status(200).send("user_update");
+    const toApiResponse = userApiResponseMapper.fromDomain(user);
+    return res.status(200).send(toApiResponse);
 })
 userRouter.get('/:id', async (req: Request, res: Response)=>{
     try{
@@ -112,12 +114,11 @@ userRouter.get('/:id', async (req: Request, res: Response)=>{
 })
 userRouter.post('/password/recovery', async (req: Request, res: Response)=>{
     try{
-        const user =await generatePasswordRecovery.execute({
+        const securityCode =await generatePasswordRecovery.execute({
             email: req.body.email,
             sender: emailSender
         })
-        console.log("======>>>>>>", user.userProperty.securityCode)
-        return res.status(200).send(user.userProperty.securityCode);
+        return res.status(200).send(securityCode);
     }
     catch(error){
         return res.status(401).send({
@@ -132,8 +133,8 @@ userRouter.post('/password/reset/:id', async (req: Request, res: Response)=>{
             id: req.params.id,
             securityCode: req.body.securityCode
         })
-        console.log("======>>>>>>", user.userProperty.securityCode)
-        return res.status(200).send("password_reset");
+        const toApiResponse = userApiResponseMapper.fromDomain(user);
+        return res.status(200).send(toApiResponse);
     }
     catch(error){
         return res.status(401).send({

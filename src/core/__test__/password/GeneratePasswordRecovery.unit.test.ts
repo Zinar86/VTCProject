@@ -1,7 +1,18 @@
 import {GeneratePasswordRecovery} from "../../usecase/user/passwords/GeneratePasswordRecovery";
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {User} from "../../domain/entities/User";
-import {InMemoryEmailGateway} from "../gateways/InMemoryEmailGateway";
+import {Msg} from "../../domain/ValueObject/Msg";
+import {EmailGateway} from "../gateways/EmailGateway";
+jest.mock("@sendgrid/mail", ()=>{
+    return {
+        send: jest.fn().mockImplementation((msg: Msg)=>{
+            if (msg.from === "nostrok.com"){
+                throw new Error("NOT_GOOD")
+            }
+        }),
+        setApiKey: jest.fn().mockImplementation()
+    }
+});
 describe("Unit - GeneratePasswordRecovery", () => {
     let user;
     let userRepository;
@@ -17,14 +28,14 @@ describe("Unit - GeneratePasswordRecovery", () => {
         })
         userRepository.update(user);
     })
-    it("Must send a mail with link to reset password", async () => {
-        const sendGridEmailGateway = new InMemoryEmailGateway()
+    it("Must generate a security code", async () => {
+        const sendGridEmailGateway = new EmailGateway()
         const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
-        await generatePasswordRecovery.execute({
+        const securityCode = await generatePasswordRecovery.execute({
             email: "nostradanar@outlook.com",
             sender: "nostradanar@outlook.com"
         })
-        console.log("securityCode=====>", user.userProperty.securityCode)
-        expect(typeof user.userProperty.securityCode).toEqual("string")
+        console.log("securityCode=====>", securityCode)
+        expect(typeof securityCode).toEqual("string")
     })
 })

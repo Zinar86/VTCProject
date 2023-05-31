@@ -1,12 +1,12 @@
 import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
 import {SignIn} from "../../usecase/user/SignIn";
 import {User} from "../../domain/entities/User";
-import {InMemoryPasswordGateway} from "../gateways/InMemoryPasswordGateway";
+import {PasswordGateway} from "../gateways/PasswordGateway";
 
 describe("Unit - SignIn", () =>{
     it("must verify if password is valid",async ()=>{
         const userRepo = new InMemoryUserRepository();
-        const passwordGateway = new InMemoryPasswordGateway();
+        const passwordGateway = new PasswordGateway();
         const signIn = new SignIn(userRepo, passwordGateway);
         const user = await User.create({
             firstName : "dede",
@@ -25,7 +25,7 @@ describe("Unit - SignIn", () =>{
     })
     it("must return an error if the password is invalid", async ()=>{
         const userRepo = new InMemoryUserRepository();
-        const passwordGateway = new InMemoryPasswordGateway();
+        const passwordGateway = new PasswordGateway();
         const signIn = new SignIn(userRepo, passwordGateway);
         const user: User = User.create({
             firstName : "dede",

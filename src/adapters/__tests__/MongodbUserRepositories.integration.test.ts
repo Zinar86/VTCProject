@@ -29,4 +29,17 @@ describe('Integration - MongodbUserRepository', () => {
         })
         await userRepository.update(user);
     })
+    it("must get a user by is ID", async () => {
+        const user = await User.create({
+            email: "ezzzl@qfa.com",
+            firstName: 'john',
+            lastName: 'doe',
+            password: 'jesuisunpassword',
+            phoneNumber: '0606060606',
+            profilePictures: 'https://www.google.com',
+        })
+        await userRepository.update(user);
+        const resultUser = await userRepository.getById(user.userProperty.id);
+        expect(resultUser.userProperty.id).toEqual(user.userProperty.id)
+    })
 })

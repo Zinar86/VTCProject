@@ -1,5 +1,4 @@
-import {PasswordGateway} from "../../gateways/PasswordGateway";
-export class InMemoryPasswordGateway implements PasswordGateway{
+export class PasswordGateway implements PasswordGateway{
     async compare(password: string, hash: string): Promise<boolean> {
         return password === hash;
     }

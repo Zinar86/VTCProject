@@ -1,5 +1,4 @@
 import {BcryptPasswordGateway} from "../gateways/bcrypt/BcryptPasswordGateway";
-import {genSaltSync} from "bcrypt";
 jest.mock("bcrypt", ()=>{
     return {
         genSaltSync: jest.fn().mockImplementation(()=>{

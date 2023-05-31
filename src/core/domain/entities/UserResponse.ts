@@ -11,5 +11,4 @@ export interface UserResponse {
     role: Role;
     phoneNumber : string;
     profilePictures : string;
-    token: string;
 }
