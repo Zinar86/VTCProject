@@ -9,8 +9,8 @@ interface OrderRideInput {
      id : string,
      userId?: string,
      driverId?: string,
-     startAddress : Address,
-     endAddress : Address,
+     startAddress : string,
+     endAddress : string,
      priceEstimation : number,
      paymentMethod : PaymentMethod,
      rideType : RideType,
@@ -23,12 +23,13 @@ export class OrderRide implements Usecase<any, any>{
     async execute( payload : OrderRideInput) {
         return Ride.create({
             userId: payload.userId,
+            driverId: payload.driverId,
             startAddress: payload.startAddress,
             endAddress: payload.endAddress,
             priceEstimation: payload.priceEstimation,
             paymentMethod: payload.paymentMethod,
             rideType: payload.rideType,
-            driverId: payload.driverId
+
         })
     }
 }

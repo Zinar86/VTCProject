@@ -46,7 +46,7 @@ export class MongodbUserRepository implements UserRepository {
                 upsert: true,
             }
         )
-        return user
+        return user;
     }
 }
 
