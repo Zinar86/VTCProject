@@ -5,14 +5,19 @@ import {BecomeADriver} from "../../../core/usecase/driver/BecomeADriver";
 import { DriverApiResponseMapper } from "../user/mappers/DriverApiResponseMapper";
 import {CreateCar} from "../../../core/usecase/driver/CreateCar";
 import {MongodbCarRepository} from "../../../adapters/repositories/mongodb/MongodbCarRepository";
+import {OrderRide} from "../../../core/usecase/ride/OrderRide";
+import {MongodbDriverRepository} from "../../../adapters/repositories/mongodb/MongodbDriverRepository";
 export const driverRouter : Router = Router();
 
-const driverRepository : DriverRepository = new InMemoryDriverRepository()
+const driverRepository : DriverRepository = new MongodbDriverRepository();
+const carRepository = new MongodbCarRepository();
+//const rideRepository = new MongodbRideRepository();
+//const orderRide = new OrderRide(rideRepository);
 const becomeDriver = new BecomeADriver(driverRepository)
 const driverApiResponseMapper = new DriverApiResponseMapper();
-const carRepository = new MongodbCarRepository();
 const createCar = new CreateCar(carRepository, driverRepository);
-driverRouter.post("/become/" ,async (req: Request, res: Response)=>{
+
+driverRouter.post("/become" ,async (req: Request, res: Response)=>{
  try {
     const driver = await becomeDriver.execute({
         id: req.body.id,
@@ -50,6 +55,9 @@ driverRouter.post("/createCar", async (req: Request, res: Response)=>{
             }
         )
     }
+})
+driverRouter.post("/orderRide", (req: Request, res: Response)=>{
+
 })
 
 

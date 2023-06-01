@@ -8,8 +8,8 @@ export interface RideProps {
     id: string;
     userId?: string;
     driverId?: string;
-    startAddress?: Address;
-    endAddress?: Address;
+    startAddress?: string;
+    endAddress?: string;
     priceEstimation: number;
     paymentMethod: PaymentMethod;
     rideType: RideType;
@@ -24,8 +24,8 @@ export class Ride {
     static create(props:{
         userId: string,
         driverId: string,
-        startAddress: Address,
-        endAddress: Address,
+        startAddress: string,
+        endAddress: string,
         priceEstimation: number,
         paymentMethod: PaymentMethod,
         rideType: RideType,

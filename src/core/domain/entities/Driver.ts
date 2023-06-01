@@ -1,5 +1,3 @@
-import {Car} from "./Car";
-
 export interface DriverProperty {
     id: string;
     car : string;

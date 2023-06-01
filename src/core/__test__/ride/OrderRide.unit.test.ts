@@ -7,7 +7,9 @@ import {InMemoryRideRepository} from "../../../adapters/repositories/inmemory/In
 describe ("Unit - OrderRide", () => {
 
     it("must create a ride", async () => {
-        const newRide = {
+        const rideRepo = new InMemoryRideRepository()
+        const orderRide = new OrderRide(rideRepo);
+        const ride = await orderRide.execute({
             id: v4(),
             userId: "marchal",
             startAddress: "44 rue du pont",
@@ -15,9 +17,8 @@ describe ("Unit - OrderRide", () => {
             priceEstimation: 115,
             paymentMethod: PaymentMethod.cash,
             rideType: RideType.Eco,
-        }
-        const rideRepo = new InMemoryRideRepository()
-        const orderRide = new OrderRide(rideRepo);
-        expect(newRide.userId).toEqual("marchal");
+        })
+        await rideRepo.save(ride);
+        expect(ride.rideProps.userId).toEqual("marchal");
     });
 })
