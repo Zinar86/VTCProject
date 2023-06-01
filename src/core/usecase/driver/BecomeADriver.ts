@@ -1,7 +1,6 @@
 
 import {Driver} from "../../domain/entities/Driver";
 import {DriverRepository} from "../../domain/repositories/DriverRepository";
-import {Car} from "../../domain/entities/Car";
 
 export interface BecomeDriverInput{
     id: string;

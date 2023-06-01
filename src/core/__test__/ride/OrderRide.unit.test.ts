@@ -4,7 +4,6 @@ import {RideType} from "../../domain/ValueObject/RideType";
 import {PaymentMethod} from "../../domain/ValueObject/PaymentMethod";
 import {InMemoryRideRepository} from "../../../adapters/repositories/inmemory/InMemoryRideRepository";
 
-
 describe ("Unit - OrderRide", () => {
 
     it("must create a ride", async () => {
