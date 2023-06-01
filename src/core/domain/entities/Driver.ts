@@ -1,4 +1,5 @@
 import {Address} from "../ValueObject/Address";
+import {v4} from "uuid";
 
 export interface DriverProperty {
     id: string;
@@ -16,7 +17,6 @@ export class Driver {
       this.driverProperty = driverProperty
   }
   static create(props:{
-      id: string;
       car: string;
       identityId: string;
       driversLicense: string;
@@ -24,7 +24,9 @@ export class Driver {
       kbis: string;
       carRegistrationDocument: string;
   }){
-        return new Driver(props)
+        return new Driver({
+            ...props,
+        id: v4()})
   }
   saveCar(id: string){
      this.driverProperty.car = id;

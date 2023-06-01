@@ -5,8 +5,8 @@ import {Driver} from "../../../core/domain/entities/Driver";
 export class MongodbDriverRepository implements DriverRepository {
     driverMapper = new MongodbDriverMapper()
     async getAllDriver(): Promise<Driver[]> {
-        const result = await DriverModel.find()
-        return []
+        const result = await DriverModel.find({});
+        return result.map(driver => this.driverMapper.toDomain(driver))
     }
     async getById(id: string): Promise<Driver> {
         const result = await DriverModel.findOne({
