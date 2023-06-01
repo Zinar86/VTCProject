@@ -1,6 +1,6 @@
-import {InMemoryCarRepository} from "../repository/InMemoryCarRepository";
+import {InMemoryCarRepository} from "../../../adapters/repositories/inmemory/InMemoryCarRepository";
 import {CreateCar} from "../../usecase/driver/CreateCar";
-import {InMemoryDriverRepository} from "../repository/InMemoryDriverRepository";
+import {InMemoryDriverRepository} from "../../../adapters/repositories/inmemory/InMemoryDriverRepository";
 import {Driver} from "../../domain/entities/Driver";
 describe("Unit - CreateCar", () => {
     let carRepo;

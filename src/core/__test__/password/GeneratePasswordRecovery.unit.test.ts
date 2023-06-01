@@ -1,5 +1,5 @@
 import {GeneratePasswordRecovery} from "../../usecase/user/passwords/GeneratePasswordRecovery";
-import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {InMemoryUserRepository} from "../../../adapters/repositories/inmemory/InMemoryUserRepository";
 import {User} from "../../domain/entities/User";
 import {Msg} from "../../domain/ValueObject/Msg";
 import {EmailGateway} from "../gateways/EmailGateway";

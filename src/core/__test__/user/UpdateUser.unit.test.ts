@@ -1,4 +1,4 @@
-import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {InMemoryUserRepository} from "../../../adapters/repositories/inmemory/InMemoryUserRepository";
 import {UpdateUser} from "../../usecase/user/UpdateUser";
 import {User} from "../../domain/entities/User";
 

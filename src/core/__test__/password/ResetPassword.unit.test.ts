@@ -1,4 +1,4 @@
-import {InMemoryUserRepository} from "../repository/InMemoryUserRepository";
+import {InMemoryUserRepository} from "../../../adapters/repositories/inmemory/InMemoryUserRepository";
 import {ResetPassword} from "../../usecase/user/passwords/ResetPassword";
 import {User} from "../../domain/entities/User";
 import {PasswordGateway} from "../gateways/PasswordGateway";

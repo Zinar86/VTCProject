@@ -1,5 +1,5 @@
-import {DriverRepository} from "../../domain/repositories/DriverRepository";
-import {Driver} from "../../domain/entities/Driver";
+import {DriverRepository} from "../../../core/domain/repositories/DriverRepository";
+import {Driver} from "../../../core/domain/entities/Driver";
 
 
 export class InMemoryDriverRepository implements DriverRepository{
@@ -16,5 +16,8 @@ export class InMemoryDriverRepository implements DriverRepository{
             throw new Error("DRIVER_NOT_FOUND")
         }
         return driver;
+    }
+    async getAllDriver(): Promise<Driver[]> {
+        return this.listDriver;
     }
 }

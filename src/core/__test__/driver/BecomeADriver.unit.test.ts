@@ -1,5 +1,5 @@
 import {BecomeADriver} from "../../usecase/driver/BecomeADriver";
-import {InMemoryDriverRepository} from "../repository/InMemoryDriverRepository";
+import {InMemoryDriverRepository} from "../../../adapters/repositories/inmemory/InMemoryDriverRepository";
 import {DriverRepository} from "../../domain/repositories/DriverRepository";
 describe ("Unit - BecomeADriver", () => {
    it ("Become a driver", async () =>{

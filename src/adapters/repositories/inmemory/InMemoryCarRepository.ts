@@ -1,5 +1,5 @@
-import {CarRepository} from "../../domain/repositories/CarRepository";
-import {Car} from "../../domain/entities/Car";
+import {CarRepository} from "../../../core/domain/repositories/CarRepository";
+import {Car} from "../../../core/domain/entities/Car";
 
 export class InMemoryCarRepository implements CarRepository {
     carList : Car[] = [];

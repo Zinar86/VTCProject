@@ -6,7 +6,6 @@ import {Usecase} from "../Usecase";
 import {Ride} from "../../domain/entities/Ride";
 
 interface OrderRideInput {
-     id : string,
      userId?: string,
      driverId?: string,
      startAddress : string,
@@ -15,13 +14,13 @@ interface OrderRideInput {
      paymentMethod : PaymentMethod,
      rideType : RideType,
 }
-export class OrderRide implements Usecase<any, any>{
+export class OrderRide implements Usecase<OrderRideInput, Promise<Ride>>{
     rideRepo : RideRepository
     constructor(rideRepo : RideRepository) {
         this.rideRepo = rideRepo
     }
     async execute( payload : OrderRideInput) {
-        return Ride.create({
+        const ride =  Ride.create({
             userId: payload.userId,
             driverId: payload.driverId,
             startAddress: payload.startAddress,
@@ -29,8 +28,9 @@ export class OrderRide implements Usecase<any, any>{
             priceEstimation: payload.priceEstimation,
             paymentMethod: payload.paymentMethod,
             rideType: payload.rideType,
-
         })
+        await this.rideRepo.save(ride);
+        return ride;
     }
 }
 

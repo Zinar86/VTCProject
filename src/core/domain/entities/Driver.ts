@@ -1,3 +1,5 @@
+import {Address} from "../ValueObject/Address";
+
 export interface DriverProperty {
     id: string;
     car : string;
@@ -5,7 +7,8 @@ export interface DriverProperty {
     driversLicense: string,
     insurance: string,
     kbis: string
-    carRegistrationDocument: string
+    carRegistrationDocument: string;
+    position?: Address;
 }
 export class Driver {
     driverProperty : DriverProperty
