@@ -32,6 +32,6 @@ export class Car {
         this.carProps.registration = props.registration,
         this.carProps.model = props.model,
         this.carProps.picture = props.picture,
-        this.carProps.seats = props.seats,
+        this.carProps.seats = props.seats
     }
 }
