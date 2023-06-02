@@ -11,6 +11,7 @@ import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/Gen
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
+import { authenticationMiddleware } from "../AuthenticationMiddleware";
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -76,22 +77,8 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
         })
     }
 })
-userRouter.use((req: AuthenticatedRequest, res, next)=>{
-    try{
-        const token = req.header('access_key')!;
-        const verifyToken = jwt.decoded(token);
-        req.user =  {
-            id: verifyToken.id,
-            email: verifyToken.email
-        }
-        return next();
-    }
-    catch(error){
-        return res.status(401).send({
-            message: error.message
-        })
-    }
-})
+userRouter.use(authenticationMiddleware)
+
 userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
     const user = await updateUser.execute({
         password: req.body.password,

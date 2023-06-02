@@ -20,12 +20,21 @@ describe("e2e - UserRouter", ()=>{
             .post('/user/signup')
             .send({
                 email: "jonh@doe.fr",
-                password: "@!:abcdefgh@@%",
+                password: "azerty234",
                 firstName: "Jonh",
                 lastName: "Doe",
                 phoneNumber: "0458652145",
                 profilePictures: "www.picture.fr",
             })
             .expect(201)
+    })
+    it("should signin",async () => {
+        await request(app)
+        .post('/user/signin')
+        .send({
+            email: "jonh@doe.fr",
+            password: "@!:abcdefgh@@%",
+        })
+        .expect(200)
     })
 })
