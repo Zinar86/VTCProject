@@ -11,7 +11,7 @@ export class SendGridEmailGateway implements EmailGateway {
         try{
             await sgMail.send(msg);
         }
-        catch{
+        catch(error){
             throw new Error("SEND_EMAIL_FAILED");
         }
     }

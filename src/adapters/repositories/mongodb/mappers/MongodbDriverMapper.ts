@@ -1,4 +1,5 @@
 import {Driver} from "../../../../core/domain/entities/Driver";
+import {Mapper} from "../../../../core/domain/Mapper";
 export interface MongoDbDriverModel {
     id: string;
     driversLicense: string;
@@ -8,7 +9,7 @@ export interface MongoDbDriverModel {
     identityId: string;
     car: string;
 }
-export class MongodbDriverMapper {
+export class MongodbDriverMapper implements Mapper<Driver, MongoDbDriverModel>{
     toDomain(driver: MongoDbDriverModel): Driver {
         return new Driver({
             id: driver.id,

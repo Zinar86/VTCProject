@@ -35,6 +35,7 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
             phoneNumber: req.body.phoneNumber,
             profilePictures: req.body.profilePictures,
         });
+        console.log(user)
         await sendGridEmailGateway.send({
             from: emailSender,
             to: user.userProperty.email,
@@ -50,6 +51,7 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
         });
     }
     catch (error){
+        console.log(error)
         return res.status(401).send({
             message: error.message
         })
