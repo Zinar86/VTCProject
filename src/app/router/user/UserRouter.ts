@@ -8,11 +8,10 @@ import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
-import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
+import {JwtIdentityGateway} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
 import {authenticationMiddleware} from "./authentificatedRequestMiddleware";
-
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -24,7 +23,7 @@ const signIn = new SignIn(userRepository,passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 const sendGridEmailGateway = new SendGridEmailGateway();
 const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
-const jwt = new Jwt(process.env.JWT_KEY);
+const jwt = new JwtIdentityGateway(process.env.JWT_KEY);
 const userApiResponseMapper = new UserApiResponseMapper();
 const resetPassword = new ResetPassword(userRepository, passwordGateway);
 userRouter.post('/signup', async (req: Request, res: Response) => {
@@ -77,22 +76,8 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
         })
     }
 })
-userRouter.use((req: AuthenticatedRequest, res, next)=>{
-    try{
-        const token = req.header('access_key')!;
-        const verifyToken = jwt.decoded(token);
-        req.user =  {
-            id: verifyToken.id,
-            email: verifyToken.email
-        }
-        return next();
-    }
-    catch(error){
-        return res.status(401).send({
-            message: error.message
-        })
-    }
-})
+userRouter.use(authenticationMiddleware)
+
 userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
     const user = await updateUser.execute({
         password: req.body.password,

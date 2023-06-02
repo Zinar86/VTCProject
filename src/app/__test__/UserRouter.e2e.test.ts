@@ -65,4 +65,13 @@ describe("e2e - UserRouter", ()=>{
             .set("access_key", token)
             .expect(200)
     })
+    it("should signin",async () => {
+        await request(app)
+        .post('/user/signin')
+        .send({
+            email: "jonh@doe.fr",
+            password: "@!:abcdefgh@@%",
+        })
+        .expect(200)
+    })
 })

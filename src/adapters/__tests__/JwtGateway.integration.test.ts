@@ -1,4 +1,4 @@
-import {Jwt} from "../gateways/jwt/JwtGateway";
+import {JwtIdentityGateway} from "../gateways/jwt/JwtGateway";
 import {User} from "../../core/domain/entities/User";
 
 jest.mock("jsonwebtoken", ()=>{
@@ -19,7 +19,7 @@ jest.mock("jsonwebtoken", ()=>{
 
 describe("Integration - JwtGateway", () =>{
     let user: User;
-    let jwt : Jwt;
+    let jwt : JwtIdentityGateway;
     beforeAll(()=>{
         user = User.create({
             firstName : "John",
@@ -29,7 +29,7 @@ describe("Integration - JwtGateway", () =>{
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        jwt = new Jwt("azerty123045");
+        jwt = new JwtIdentityGateway("azerty123045");
     })
     it("should generate jwt token", async () =>{
         const token = jwt.generate(user)
