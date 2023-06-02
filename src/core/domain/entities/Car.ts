@@ -27,11 +27,11 @@ export class Car {
         registration : string,
         model: string,
         picture : string,
-        seats?: number,
+        seats: number,
     }){
         this.carProps.registration = props.registration,
         this.carProps.model = props.model,
         this.carProps.picture = props.picture,
-        this.carProps.seats = props.seats
+        this.carProps.seats = props.seats,
     }
 }
