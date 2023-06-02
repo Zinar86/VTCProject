@@ -15,14 +15,14 @@ describe ("Unit - SignUp", () => {
             firstName : "Nico",
             lastName : "Heeut",
             email : "nico@heuttt.fr",
-            password : "@!:abcdefgh@@%",
+            password : "1235abcdef55",
             phoneNumber : "02314587450124578657",
             profilePictures : "www.picture.com"
         })
         expect(user.userProperty.firstName).toEqual("Nico")
-        expect(user.userProperty.password).toEqual("@!:abcdefgh@@%")
+        expect(user.userProperty.password).toEqual("1235abcdef55")
     })
-    it("should return an error if the password is not contain special character", async () =>{
+    it("should return an error if the password is not contain Minimum eight characters, at least one letter and one number", async () =>{
         const user: Promise<User> = signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
@@ -31,28 +31,17 @@ describe ("Unit - SignUp", () => {
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
-        await expect(user).rejects.toThrow("PASSWORD_MUST_CONTAIN_3_SPECIAL_CHARACTER");
+        await expect(user).rejects.toThrow("Minimum eight characters, at least one letter and one number");
     })
     it("should return an error if the email not respect synthax of email", async ()=>{
         const user = signUp.execute({
             firstName : "Nico",
             lastName : "Heeut",
             email : "nico",
-            password : "@!:abcdefgh@@%",
+            password : "1235abcdef55",
             phoneNumber : "0231458745",
             profilePictures : "www.picture.com"
         })
         await expect(user).rejects.toThrow("EMAIL_NO_VALID");
-    })
-    it("should return an error if the password contain under 8 character", async ()=>{
-        const user = signUp.execute({
-            firstName : "Nico",
-            lastName : "Heeut",
-            email : "nico",
-            password : "@!:",
-            phoneNumber : "0231458745",
-            profilePictures : "www.picture.com"
-        })
-        await expect(user).rejects.toThrow("PASSWORD_MUST_CONTAIN_8_CHARACTER_MINIMUM");
     })
 })
