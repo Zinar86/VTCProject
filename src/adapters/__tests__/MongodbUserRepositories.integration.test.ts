@@ -15,7 +15,7 @@ describe('Integration - MongodbUserRepository', () => {
     })
 
     afterAll(async () => {
-        await connection.dropDatabase();
+        await mongoose.connection.dropDatabase();
     });
 
     it('Should save a user in mnogodb repository', async () => {

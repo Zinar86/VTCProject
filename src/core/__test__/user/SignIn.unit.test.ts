@@ -14,7 +14,7 @@ describe("Unit - SignIn", () =>{
     beforeAll(async ()=>{
         userRepo = new InMemoryUserRepository();
         bcryptPasswordGateway = new BcryptPasswordGateway();
-        signUp = new SignUp(userRepo, bcryptPasswordGateway)
+        signUp = new SignUp(userRepo, bcryptPasswordGateway);
         signIn = new SignIn(userRepo, bcryptPasswordGateway);
         user = await signUp.execute({
             firstName : "dede",
