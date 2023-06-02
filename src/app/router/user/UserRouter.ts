@@ -8,7 +8,7 @@ import {UpdateUser} from "../../../core/usecase/user/UpdateUser";
 import {AuthenticatedRequest} from "../../config/AuthenticatedRequest";
 import {SendGridEmailGateway} from "../../../adapters/gateways/sendgrid/SendGridEmailGateway";
 import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/GeneratePasswordRecovery";
-import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
+import {JwtIdentityGateway} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
 import { authenticationMiddleware } from "../AuthenticationMiddleware";
@@ -23,7 +23,7 @@ const signIn = new SignIn(userRepository,passwordGateway);
 const updateUser = new UpdateUser(userRepository);
 const sendGridEmailGateway = new SendGridEmailGateway();
 const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, sendGridEmailGateway);
-const jwt = new Jwt(process.env.JWT_KEY);
+const jwt = new JwtIdentityGateway(process.env.JWT_KEY);
 const userApiResponseMapper = new UserApiResponseMapper();
 const resetPassword = new ResetPassword(userRepository, passwordGateway);
 userRouter.post('/signup', async (req: Request, res: Response) => {

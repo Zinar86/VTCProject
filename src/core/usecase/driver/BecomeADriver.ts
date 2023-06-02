@@ -18,7 +18,6 @@ export class BecomeADriver {
     }
     async execute(input:BecomeDriverInput) :Promise<Driver> {
         const driver: Driver = Driver.create({
-            id: input.id,
             car: "",
             identityId: input.identityId,
             driversLicense: input.driversLicense,
