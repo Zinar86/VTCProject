@@ -10,7 +10,7 @@ export class SignIn implements Usecase<SignInProps, User> {
 
     userRepository : UserRepository;
     passwordGateway : PasswordGateway;
-    constructor(userRepository : UserRepository, passwordGateway: PasswordGateway,) {
+    constructor(userRepository : UserRepository, passwordGateway: PasswordGateway) {
         this.passwordGateway = passwordGateway;
         this.userRepository = userRepository;
     }

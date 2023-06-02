@@ -2,9 +2,9 @@ export class Password {
     value : string;
     constructor(password : string){
         const passwordValidate: boolean = this.passwordValid(password)
-        if(!passwordValidate){
-            throw new Error("Minimum eight characters, at least one uppercase letter, one lowercase letter and one number")
-        }
+        //if(!passwordValidate){
+        //    throw new Error("Minimum eight characters, at least one uppercase letter, one lowercase letter and one number")
+        //}
         if (password.length <= 8){
             throw new Error("PASSWORD_MUST_CONTAIN_8_CHARACTER_MINIMUM")
         }
