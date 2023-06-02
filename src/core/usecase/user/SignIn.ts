@@ -15,9 +15,10 @@ export class SignIn implements Usecase<SignInProps, User> {
         this.userRepository = userRepository;
     }
     async execute(payload: SignInProps) {
-
         const user = await this.userRepository.getByEmail(payload.email);
+        console.log(user)
         const passwordCheck = await this.passwordGateway.compare(payload.password, user.userProperty.password);
+        console.log(passwordCheck)
         if (passwordCheck) {
             return user;
         }
