@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import express, {Request} from "express";
-import {AuthenticatedRequest} from "./app/config/AuthenticatedRequest";
 import {userRouter} from "./app/router/user/UserRouter";
 import {driverRouter} from "./app/router/driver/DriverRouter";
 
