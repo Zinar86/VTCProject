@@ -2,7 +2,6 @@ export class Password {
     value : string;
     constructor(password : string){
         const passwordValidate: boolean = this.passwordValid(password);
-        console.log(passwordValidate)
         if(!passwordValidate){
             throw new Error("Minimum eight characters, at least one letter and one number")
         }
