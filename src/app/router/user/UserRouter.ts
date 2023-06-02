@@ -11,6 +11,7 @@ import {GeneratePasswordRecovery} from "../../../core/usecase/user/passwords/Gen
 import {Jwt} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
+import {authenticationMiddleware} from "./authentificatedRequestMiddleware";
 
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
@@ -36,7 +37,6 @@ userRouter.post('/signup', async (req: Request, res: Response) => {
             phoneNumber: req.body.phoneNumber,
             profilePictures: req.body.profilePictures,
         });
-        console.log(user)
         await sendGridEmailGateway.send({
             from: emailSender,
             to: user.userProperty.email,
