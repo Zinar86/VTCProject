@@ -1,17 +1,19 @@
 import {UserRepository} from "../../../domain/repositories/UserRepository";
 import {EmailGateway} from "../../../gateways/EmailGateway";
 import {v4} from "uuid";
-export class GeneratePasswordRecovery {
+import {Usecase} from "../../Usecase";
+export interface GeneratePasswordRecoveryProps {
+    email: string,
+    sender: string
+}
+export class GeneratePasswordRecovery implements Usecase<GeneratePasswordRecoveryProps,string>{
     userRepository : UserRepository;
     emailGateway : EmailGateway;
     constructor(userRepository : UserRepository, emailGateway : EmailGateway) {
         this.userRepository = userRepository;
         this.emailGateway = emailGateway;
     }
-    async execute(payload:{
-        email: string,
-        sender: string
-    }){
+    async execute(payload: GeneratePasswordRecoveryProps){
         const user= await this.userRepository.getByEmail(payload.email);
         if (!user){
             throw new Error("USER_NOT_FOUND")

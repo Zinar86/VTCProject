@@ -101,6 +101,7 @@ describe("e2e - UserRouter", ()=>{
             .expect(200)
             .expect(response => {
                 console.log("SECURITY CODE =====>", response.body.securityCode);
+                console.log("USER SECURITY CODE===>", user.userProperty.securityCode)
                 securityCode = response.body.securityCode;
             })
     })
