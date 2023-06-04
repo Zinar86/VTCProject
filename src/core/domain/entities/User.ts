@@ -44,7 +44,6 @@ export class User {
     update(props: {
         firstName: string,
         lastName: string,
-        password: string,
         phoneNumber: string,
         profilePictures: string,
         securityCode: string
@@ -52,7 +51,6 @@ export class User {
     {
        this.userProperty.firstName = props.firstName;
        this.userProperty.lastName = props.lastName;
-       this.userProperty.password = props.password;
        this.userProperty.phoneNumber = props.phoneNumber;
        this.userProperty.profilePictures = props.profilePictures;
        this.userProperty.securityCode = props.securityCode;

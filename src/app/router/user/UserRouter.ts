@@ -76,11 +76,9 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
         })
     }
 })
-userRouter.use(authenticationMiddleware)
-
+userRouter.use(authenticationMiddleware);
 userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
     const user = await updateUser.execute({
-        password: req.body.password,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
@@ -109,7 +107,7 @@ userRouter.post('/password/recovery', async (req: Request, res: Response)=>{
             email: req.body.email,
             sender: emailSender
         })
-        return res.status(200).send(securityCode);
+        return res.status(200).send({securityCode: securityCode});
     }
     catch(error){
         return res.status(401).send({
@@ -124,6 +122,7 @@ userRouter.post('/password/reset/:id', async (req: Request, res: Response)=>{
             id: req.params.id,
             securityCode: req.body.securityCode
         })
+
         const toApiResponse = userApiResponseMapper.fromDomain(user);
         return res.status(200).send(toApiResponse);
     }

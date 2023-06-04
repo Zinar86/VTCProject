@@ -6,7 +6,6 @@ export interface UpdateUserInput {
     id: string;
     firstName: string;
     lastName : string;
-    password : string;
     phoneNumber : string;
     profilePictures : string;
     securityCode: string;
@@ -22,7 +21,6 @@ export class UpdateUser implements Usecase<UpdateUserInput, User>{
         user.update({
             firstName: input.firstName,
             lastName: input.lastName,
-            password : input.password,
             phoneNumber : input.phoneNumber,
             profilePictures : input.profilePictures,
             securityCode: input.securityCode

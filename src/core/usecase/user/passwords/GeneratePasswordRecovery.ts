@@ -17,8 +17,14 @@ export class GeneratePasswordRecovery {
             throw new Error("USER_NOT_FOUND")
         }
         const securityCode= v4()
+        user.update({
+            firstName: user.userProperty.firstName,
+            lastName: user.userProperty.lastName,
+            phoneNumber: user.userProperty.phoneNumber,
+            profilePictures: user.userProperty.profilePictures,
+            securityCode: securityCode
+        })
         await this.userRepository.update(user)
-
         await this.emailGateway.send({
             from: payload.sender,
             to: payload.email,
