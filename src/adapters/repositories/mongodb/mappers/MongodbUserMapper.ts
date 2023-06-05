@@ -19,6 +19,7 @@ export interface MongodbUserMapperProps {
         city:  string,
         zipCode:  string
     };
+    securityCode: string;
 }
 export class MongodbUserMapper implements Mapper<User, MongodbUserMapperProps> {
     toDomain(raw: MongodbUserMapperProps): User {
@@ -38,7 +39,8 @@ export class MongodbUserMapper implements Mapper<User, MongodbUserMapperProps> {
                 zipCode: raw.position.zipCode
             },
             rating: raw.rating,
-            role: raw.type as Role
+            role: raw.type as Role,
+            securityCode: raw.securityCode
         });
     }
 }

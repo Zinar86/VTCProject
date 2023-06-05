@@ -40,6 +40,7 @@ export class MongodbUserRepository implements UserRepository {
                     rating : user.userProperty.rating,
                     position : user.userProperty.position,
                     type : user.userProperty.role,
+                    securityCode: user.userProperty.securityCode
                 }
             },
             {

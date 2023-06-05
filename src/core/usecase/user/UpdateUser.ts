@@ -17,7 +17,6 @@ export class UpdateUser implements Usecase<UpdateUserInput, User>{
     }
     async execute(input: UpdateUserInput): Promise<User>{
         const user = await this.userRepository.getById(input.id);
-
         user.update({
             firstName: input.firstName,
             lastName: input.lastName,

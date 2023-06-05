@@ -68,6 +68,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    securityCode: {
+        type: String,
+        required: false,
+    }
 })
 
 export const UserModel = mongoose.model('users', userSchema);

@@ -12,6 +12,7 @@ import {JwtIdentityGateway} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
 import {authenticationMiddleware} from "./authentificatedRequestMiddleware";
+import { PasswordGateway } from "core/__test__/gateways/PasswordGateway";
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -84,7 +85,7 @@ userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
         phoneNumber: req.body.phoneNumber,
         profilePictures: req.body.profilePictures,
         id: req.user.id,
-        securityCode: null,
+        securityCode: req.body.securityCode,
     })
     const toApiResponse = userApiResponseMapper.fromDomain(user);
     return res.status(200).send(toApiResponse);
@@ -103,7 +104,7 @@ userRouter.get('/:id', async (req: Request, res: Response)=>{
 })
 userRouter.post('/password/recovery', async (req: Request, res: Response)=>{
     try{
-        const securityCode =await generatePasswordRecovery.execute({
+        const securityCode = await generatePasswordRecovery.execute({
             email: req.body.email,
             sender: emailSender
         })
@@ -115,14 +116,13 @@ userRouter.post('/password/recovery', async (req: Request, res: Response)=>{
         })
     }
 })
-userRouter.post('/password/reset/:id', async (req: Request, res: Response)=>{
+userRouter.post('/password/reset/', async (req: Request, res: Response)=>{
     try {
         const user = await resetPassword.execute({
-            newPassword: req.body.newPAssword,
-            id: req.params.id,
+            newPassword: req.body.newPassword,
+            id: req.body.id,
             securityCode: req.body.securityCode
         })
-
         const toApiResponse = userApiResponseMapper.fromDomain(user);
         return res.status(200).send(toApiResponse);
     }

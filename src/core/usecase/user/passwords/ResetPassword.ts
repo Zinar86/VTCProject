@@ -14,7 +14,7 @@ export class ResetPassword {
         this.passwordGateway= passwordGateway;
     }
     async execute( payload: ResetPasswordProps ){
-        const user = await this.userRepository.getById(payload.id)
+        const user = await this.userRepository.getById(payload.id);
         const password = new Password(payload.newPassword).value;
         const passwordHash = await this.passwordGateway.encrypt(password);
         await user.resetPassword(payload.securityCode, passwordHash)

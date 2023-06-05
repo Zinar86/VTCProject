@@ -28,6 +28,7 @@ export class User {
         password : string;
         phoneNumber : string;
         profilePictures : string;
+        securityCode?: string;
     })
     {
         return new User ({
@@ -37,7 +38,6 @@ export class User {
             rating : [],
             position : null,
             role: Role.client,
-            securityCode: null
         })
     }
 
