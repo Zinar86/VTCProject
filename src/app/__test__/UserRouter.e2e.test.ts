@@ -9,9 +9,10 @@ import {MongodbUserRepository} from "../../adapters/repositories/mongodb/Mongodb
 import {JwtIdentityGateway} from "../../adapters/gateways/jwt/JwtGateway";
 import { UserRepository } from "core/domain/repositories/UserRepository";
 import { PasswordGateway } from "core/gateways/PasswordGateway";
-import { SignUp } from "../../core/usecase/user/SignUp";
+import { SignUp, SignUpProps } from "../../core/usecase/user/SignUp";
 import { BcryptPasswordGateway } from "../../adapters/gateways/bcrypt/BcryptPasswordGateway";
 import {MongoMemoryServer} from "mongodb-memory-server";
+import { Usecase } from "core/usecase/Usecase";
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -24,20 +25,22 @@ describe("e2e - UserRouter", ()=> {
     let emailSender: string;
     let mongoDbUserRepo: UserRepository;
     let jwtGateway: JwtIdentityGateway;
-    let signUp;
+    let signUp: Usecase<SignUpProps, User>;
     let passwordGateway: PasswordGateway;
     let connection: Connection;
     beforeAll(async () =>{
+        //MongoDb
         const mongod = await MongoMemoryServer.create();
         const uri = mongod.getUri();
-        console.log(uri)
         await mongoose.connect(`${uri}VTCProject`)
         connection = await mongoose.createConnection(`${uri}VTCProject`)
-        await mongoose.connection.dropDatabase();
         mongoDbUserRepo = new MongodbUserRepository();
+        //Gateway
         passwordGateway = new BcryptPasswordGateway()
-        signUp = new SignUp(mongoDbUserRepo, passwordGateway)
         jwtGateway = new JwtIdentityGateway(process.env.JWT_KEY);
+        //Usecase
+        signUp = new SignUp(mongoDbUserRepo, passwordGateway)
+        //Var
         emailSender = process.env.EMAIL_SENDER;
         user = await signUp.execute({
             email: "john@doe.com",
@@ -46,13 +49,6 @@ describe("e2e - UserRouter", ()=> {
             firstName: "john",
             phoneNumber: "01245877",
             profilePictures: "www.picture.com",
-        })
-        user.update({
-            securityCode: user.userProperty.securityCode,
-            firstName: user.userProperty.firstName,
-            lastName: user.userProperty.lastName,
-            phoneNumber: user.userProperty.phoneNumber,
-            profilePictures: user.userProperty.profilePictures,
         })
         await mongoDbUserRepo.update(user);
         userId = user.userProperty.id;

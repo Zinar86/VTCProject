@@ -2,6 +2,7 @@ import {Driver} from "../../../../core/domain/entities/Driver";
 import {Mapper} from "../../../../core/domain/Mapper";
 export interface MongoDbDriverModel {
     id: string;
+    userId: string;
     driversLicense: string;
     kbis: string;
     insurance: string;
@@ -12,6 +13,7 @@ export interface MongoDbDriverModel {
 export class MongodbDriverMapper implements Mapper<Driver, MongoDbDriverModel>{
     toDomain(driver: MongoDbDriverModel): Driver {
         return new Driver({
+            userId: driver.userId,
             id: driver.id,
             driversLicense: driver.driversLicense,
             kbis: driver.kbis,
@@ -23,6 +25,7 @@ export class MongodbDriverMapper implements Mapper<Driver, MongoDbDriverModel>{
     }
     fromDomain(driver :Driver): MongoDbDriverModel {
         return {
+            userId: driver.driverProperty.userId,
             id: driver.driverProperty.id,
             driversLicense: driver.driverProperty.driversLicense,
             kbis: driver.driverProperty.kbis,

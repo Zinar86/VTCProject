@@ -21,16 +21,17 @@ const createCar = new CreateCar(carRepository, driverRepository);
 driverRouter.post("/become" ,async (req: Request, res: Response)=>{
  try {
     const driver = await becomeDriver.execute({
-        id: req.body.id,
-        carId: "",
+        userId: req.body.userId,
+        carId: req.body.carId,
         identityId: req.body.identityId,
         driversLicense: req.body.driversLicense,
         insurance: req.body.insurance,
         kbis: req.body.kbis,
         carRegistrationDocument: req.body.carRegistrationDocument,
     })
+    
     const toApiResponse = driverApiResponseMapper.fromDomain(driver);
-    return res.status(200).send(toApiResponse);
+    return res.status(201).send(toApiResponse);
  }
  catch (error){
      return res.status(401).send({

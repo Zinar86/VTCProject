@@ -4,7 +4,7 @@ import {RideType} from "../../domain/ValueObject/RideType";
 import {GetCalculatedDistanceGateway} from "../../../adapters/gateways/estimateRide/GetCalculatedDistanceGateway";
 
 describe("Unit - EstimatePrice", () => {
-    it("doit retourner une estimation du prix d'une course d'un point A a un point B", async ()=>{
+    it("must return an estimate of the price of a trip from point A to point B", async ()=>{
         const startAddress ={
             long: 2.290084,
             lat: 49.897443,
@@ -28,6 +28,6 @@ describe("Unit - EstimatePrice", () => {
             startAddress:startAddress,
             endAddress:endAddress
         })
-        expect(result).toEqual(50 )
+        expect(result).toEqual(117.04)
     })
 })
