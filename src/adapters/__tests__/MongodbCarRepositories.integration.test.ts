@@ -8,8 +8,8 @@ describe("Integration - MongodbCarRepository", () => {
     let connection: Connection;
     beforeAll(async () => {
         carRepository = new MongodbCarRepository();
-        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject')
-        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/car')
+        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject');
+        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/VTCProject');
     })
     afterAll(async () => {
         await connection.dropDatabase();

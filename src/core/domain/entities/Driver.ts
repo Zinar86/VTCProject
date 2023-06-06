@@ -3,6 +3,7 @@ import {v4} from "uuid";
 
 export interface DriverProperty {
     id: string;
+    userId: string;
     car : string;
     identityId: string,
     driversLicense: string,
@@ -23,6 +24,7 @@ export class Driver {
       insurance: string;
       kbis: string;
       carRegistrationDocument: string;
+      userId: string;
   }){
         return new Driver({
             ...props,

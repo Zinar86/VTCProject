@@ -1,13 +1,12 @@
 import "./__mocks__/sendGrid.mock";
 import dotenv from "dotenv";
-import express, { response } from "express";
+import express from "express";
 import { userRouter } from "../router/user/UserRouter";
 import request from "supertest";
 import mongoose from "mongoose";
 import {User} from "../../core/domain/entities/User";
 import {MongodbUserRepository} from "../../adapters/repositories/mongodb/MongodbUserRepositories";
 import {JwtIdentityGateway} from "../../adapters/gateways/jwt/JwtGateway";
-import {v4} from "uuid";
 import { UserRepository } from "core/domain/repositories/UserRepository";
 import { PasswordGateway } from "core/gateways/PasswordGateway";
 import { SignUp } from "../../core/usecase/user/SignUp";
@@ -22,7 +21,6 @@ describe("e2e - UserRouter", ()=> {
     let token: string;
     let user: User;
     let emailSender: string;
-    let securityCode: string;
     let mongoDbUserRepo: UserRepository;
     let jwtGateway: JwtIdentityGateway;
     let signUp;
@@ -43,9 +41,8 @@ describe("e2e - UserRouter", ()=> {
             phoneNumber: "01245877",
             profilePictures: "www.picture.com",
         })
-        securityCode = v4()
         user.update({
-            securityCode: securityCode,
+            securityCode: user.userProperty.securityCode,
             firstName: user.userProperty.firstName,
             lastName: user.userProperty.lastName,
             phoneNumber: user.userProperty.phoneNumber,
@@ -57,7 +54,6 @@ describe("e2e - UserRouter", ()=> {
     })
     afterAll(async () => {
         await mongoose.connection.dropDatabase();
-
     });
     it("should signup", async () => {
         await request(app)
@@ -129,7 +125,6 @@ describe("e2e - UserRouter", ()=> {
     })
     it("should reset the password of a user with a security code", async () => {
         user = await mongoDbUserRepo.getById(userId)
-        console.log(user.userProperty.securityCode)
         await request(app)
             .post(`/user/password/reset/`)
             .set("access_key",token)
