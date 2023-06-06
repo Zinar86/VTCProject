@@ -3,7 +3,7 @@ import {Driver} from "../../domain/entities/Driver";
 import {DriverRepository} from "../../domain/repositories/DriverRepository";
 
 export interface BecomeDriverInput{
-    id: string;
+    userId: string;
     carId: string;
     identityId: string;
     driversLicense: string;
@@ -18,7 +18,8 @@ export class BecomeADriver {
     }
     async execute(input:BecomeDriverInput) :Promise<Driver> {
         const driver: Driver = Driver.create({
-            car: "",
+            userId: input.userId,
+            car: input.carId,
             identityId: input.identityId,
             driversLicense: input.driversLicense,
             insurance: input.insurance,

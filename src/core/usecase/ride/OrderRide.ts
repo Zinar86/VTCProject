@@ -1,5 +1,4 @@
 import {PaymentMethod} from "../../domain/ValueObject/PaymentMethod";
-import {Address} from "../../domain/ValueObject/Address";
 import {RideType} from "../../domain/ValueObject/RideType";
 import {RideRepository} from "../../domain/repositories/RideRepository";
 import {Usecase} from "../Usecase";
