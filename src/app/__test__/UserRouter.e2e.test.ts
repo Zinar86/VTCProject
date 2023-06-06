@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express, { response } from "express";
 import { userRouter } from "../router/user/UserRouter";
 import request from "supertest";
-import mongoose from "mongoose";
+import mongoose, {Connection} from "mongoose";
 import {User} from "../../core/domain/entities/User";
 import {MongodbUserRepository} from "../../adapters/repositories/mongodb/MongodbUserRepositories";
 import {JwtIdentityGateway} from "../../adapters/gateways/jwt/JwtGateway";
@@ -12,6 +12,7 @@ import { UserRepository } from "core/domain/repositories/UserRepository";
 import { PasswordGateway } from "core/gateways/PasswordGateway";
 import { SignUp } from "../../core/usecase/user/SignUp";
 import { BcryptPasswordGateway } from "../../adapters/gateways/bcrypt/BcryptPasswordGateway";
+import {MongoMemoryServer} from "mongodb-memory-server";
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -27,8 +28,13 @@ describe("e2e - UserRouter", ()=> {
     let jwtGateway: JwtIdentityGateway;
     let signUp;
     let passwordGateway: PasswordGateway;
+    let connection: Connection;
     beforeAll(async () =>{
-        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject');
+        const mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        console.log(uri)
+        await mongoose.connect(`${uri}VTCProject`)
+        connection = await mongoose.createConnection(`${uri}VTCProject`)
         await mongoose.connection.dropDatabase();
         mongoDbUserRepo = new MongodbUserRepository();
         passwordGateway = new BcryptPasswordGateway()

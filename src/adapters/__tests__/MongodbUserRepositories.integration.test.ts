@@ -3,15 +3,20 @@ import * as mongoose from 'mongoose';
 import { UserRepository } from "../../core/domain/repositories/UserRepository";
 import { MongodbUserRepository } from "../repositories/mongodb/MongodbUserRepositories";
 import {Connection} from "mongoose";
-
+import {MongoMemoryServer} from "mongodb-memory-server";
+jest.setTimeout(10000000);
 describe('Integration - MongodbUserRepository', () => {
     let userRepository: UserRepository;
     let connection: Connection;
 
     beforeAll(async () => {
         userRepository = new MongodbUserRepository();
-        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject')
-        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/user')
+        const mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        console.log(uri)
+        await mongoose.connect(`${uri}VTCProject`)
+        connection = await mongoose.createConnection(`${uri}VTCProject`)
+
     })
 
     afterAll(async () => {
