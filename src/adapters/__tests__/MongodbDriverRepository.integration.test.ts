@@ -2,13 +2,17 @@ import {Driver} from "../../core/domain/entities/Driver";
 import {MongodbDriverRepository} from "../repositories/mongodb/MongodbDriverRepository";
 import {DriverRepository} from "../../core/domain/repositories/DriverRepository";
 import mongoose, {Connection} from "mongoose";
+import {MongoMemoryServer} from "mongodb-memory-server";
 
 describe('Integration - MongodbDriverRepository', () => {
     let driverRepo: DriverRepository;
     let connection: Connection;
     beforeAll(async ()=>{
-        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject')
-        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/user')
+        const mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        console.log(uri)
+        await mongoose.connect(`${uri}VTCProject`)
+        connection = await mongoose.createConnection(`${uri}VTCProject`)
         const driver =  Driver.create({
             car:"azerty",
             identityId:'',

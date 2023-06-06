@@ -1,5 +1,5 @@
-import {JwtIdentityGateway} from "../gateways/jwt/JwtGateway";
 import {User} from "../../core/domain/entities/User";
+import {JwtIdentityGateway} from "../gateways/jwt/JwtGateway";
 
 jest.mock("jsonwebtoken", ()=>{
     return {

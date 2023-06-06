@@ -3,13 +3,17 @@ import mongoose from "mongoose";
 import {MongodbCarRepository} from "../repositories/mongodb/MongodbCarRepository";
 import {CarRepository} from "../../core/domain/repositories/CarRepository";
 import {Car} from "../../core/domain/entities/Car";
+import {MongoMemoryServer} from "mongodb-memory-server";
 describe("Integration - MongodbCarRepository", () => {
     let carRepository: CarRepository;
     let connection: Connection;
     beforeAll(async () => {
         carRepository = new MongodbCarRepository();
-        await mongoose.connect('mongodb://127.0.0.1:27017/VTCProject');
-        connection = await mongoose.createConnection('mongodb://127.0.0.1:27017/VTCProject');
+        const mongod = await MongoMemoryServer.create();
+        const uri = mongod.getUri();
+        console.log(uri)
+        await mongoose.connect(`${uri}VTCProject`)
+        connection = await mongoose.createConnection(`${uri}VTCProject`)
     })
     afterAll(async () => {
         await connection.dropDatabase();
