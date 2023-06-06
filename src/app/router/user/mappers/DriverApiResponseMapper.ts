@@ -5,7 +5,7 @@ import { DriverResponse} from "../../../../core/domain/entities/DriverResponse";
 export class DriverApiResponseMapper implements Mapper<Driver, DriverResponse> {
     fromDomain(driver: Driver): DriverResponse {
         return {
-            id : driver.driverProperty.id,
+            userId : driver.driverProperty.userId,
             car : driver.driverProperty.car,
             identityId : driver.driverProperty.identityId,
             driversLicense : driver.driverProperty.driversLicense,

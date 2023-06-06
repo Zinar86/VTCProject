@@ -1,7 +1,7 @@
 import { Car } from "./Car";
 
 export interface DriverResponse {
-    id: string;
+    userId: string;
     car : string;
     identityId: string,
     driversLicense: string,

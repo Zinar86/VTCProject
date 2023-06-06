@@ -12,7 +12,7 @@ import {JwtIdentityGateway} from "../../../adapters/gateways/jwt/JwtGateway";
 import {UserApiResponseMapper} from "./mappers/UserApiResponseMapper";
 import {ResetPassword} from "../../../core/usecase/user/passwords/ResetPassword";
 import {authenticationMiddleware} from "./authentificatedRequestMiddleware";
-import { PasswordGateway } from "core/__test__/gateways/PasswordGateway";
+
 dotenv.config();
 const emailSender = process.env.EMAIL_SENDER;
 export const userRouter = Router();
@@ -27,6 +27,7 @@ const generatePasswordRecovery = new GeneratePasswordRecovery(userRepository, se
 const jwt = new JwtIdentityGateway(process.env.JWT_KEY);
 const userApiResponseMapper = new UserApiResponseMapper();
 const resetPassword = new ResetPassword(userRepository, passwordGateway);
+
 userRouter.post('/signup', async (req: Request, res: Response) => {
     try {
         const user = await signUp.execute({
@@ -77,7 +78,9 @@ userRouter.post('/signin', async (req: Request, res: Response) => {
         })
     }
 })
+
 userRouter.use(authenticationMiddleware);
+
 userRouter.put('/', async (req: AuthenticatedRequest, res: Response) => {
     const user = await updateUser.execute({
         firstName: req.body.firstName,
